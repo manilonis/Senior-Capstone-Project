@@ -9,12 +9,6 @@
 
   <name>WorldFactbookAPI</name>
   <url>http://maven.apache.org</url>
-  
-  <plugins>
-  	<configuration>
-  	<mainClass>Attempt-1.WorldFactbookAPI.App</mainClass>
-  	</configuration>
-  </plugins>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
