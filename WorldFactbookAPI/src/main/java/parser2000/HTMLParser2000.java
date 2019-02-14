@@ -17,6 +17,8 @@ public class HTMLParser2000 {
     	try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements ee = d.select("p");
+			Elements top = d.select("b");
+			System.out.println(top.html());
 			//System.out.println(ee.html());
 			String p = ee.html();
 			String[] lines = p.split("\n");
@@ -66,9 +68,9 @@ public class HTMLParser2000 {
 				
 				info.put(topic, stuff1);
 			}
-			System.out.println(info.size());
-			System.out.println(info.keySet());
-			System.out.println(info.get("Highways"));
+			//System.out.println(info.size());
+			//System.out.println(info.keySet());
+			//System.out.println(info.get("Highways"));
 			
 			//System.out.println(titles.size());
 			//System.out.println(titles.get(1));
