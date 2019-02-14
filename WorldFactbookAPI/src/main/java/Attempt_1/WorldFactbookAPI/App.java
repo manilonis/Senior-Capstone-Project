@@ -16,7 +16,7 @@ public class App {
     	try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements ee = d.select("p");
-			System.out.println(ee);
+			System.out.println(ee.html());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
