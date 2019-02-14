@@ -67,6 +67,7 @@ public class HTMLParser2000 {
 				info.put(topic, stuff1);
 			}
 			System.out.println(info.size());
+			System.out.println(info.keySet());
 			System.out.println(info.get("Economy"));
 			
 			//System.out.println(titles.size());
