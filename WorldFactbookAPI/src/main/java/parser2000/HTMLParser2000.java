@@ -32,8 +32,20 @@ public class HTMLParser2000 {
 				else continue;
 			}
 			
-			System.out.println(titles.size());
-			System.out.println(titles.get(1));
+			ArrayList<Tuple<String, String>> info = new ArrayList<Tuple<String, String>>();
+			
+			
+			for(int i =0; i<titles.size(); i++) {
+				Tuple<String, Integer> t = titles.get(i);
+				String stuff = t.getX();
+				int b = stuff.indexOf("<b>");
+				int e = stuff.indexOf("</b>");
+				String topic = stuff.substring(b+3, e-2);
+				System.out.println(topic);
+			}
+			
+			//System.out.println(titles.size());
+			//System.out.println(titles.get(1));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
