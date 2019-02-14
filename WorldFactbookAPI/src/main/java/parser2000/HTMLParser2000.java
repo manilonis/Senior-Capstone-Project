@@ -68,7 +68,7 @@ public class HTMLParser2000 {
 			}
 			System.out.println(info.size());
 			System.out.println(info.keySet());
-			System.out.println(info.get("Economy"));
+			System.out.println(info.get("Highways"));
 			
 			//System.out.println(titles.size());
 			//System.out.println(titles.get(1));
