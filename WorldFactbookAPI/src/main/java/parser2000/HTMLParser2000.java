@@ -67,7 +67,7 @@ public class HTMLParser2000 {
 				info.put(stuff, stuff1);
 			}
 			
-			System.out.println(info.get("Coastline"));
+			System.out.println(info.get("Economy"));
 			
 			//System.out.println(titles.size());
 			//System.out.println(titles.get(1));
