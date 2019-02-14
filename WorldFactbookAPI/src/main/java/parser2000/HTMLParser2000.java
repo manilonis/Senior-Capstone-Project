@@ -40,7 +40,7 @@ public class HTMLParser2000 {
 				String stuff = t.getX();
 				int b = stuff.indexOf("<b>");
 				int e = stuff.indexOf("</b>");
-				String topic = stuff.substring(b+3, e-2);
+				String topic = stuff.substring(b+3, e-1);
 				System.out.println(topic);
 			}
 			
