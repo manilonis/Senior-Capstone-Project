@@ -44,6 +44,23 @@ public class HTMLParser2000 {
 				
 				String stuff1 = stuff.substring(e+4);
 				System.out.println(topic);
+				
+				
+				int thisIndex = t.getY();
+				if (i+1 < titles.size() && (thisIndex+1 != titles.get(i+1).getY())) {
+					int[] indecies = range(thisIndex, titles.get(i+1).getY());
+					for (int in: indecies) {
+						stuff1 += lines[in];
+					}
+				}
+				else {
+					if (i+1 < lines.length) {
+						int[] indecies = range(thisIndex, lines.length-1);
+						for (int in: indecies) {
+							stuff1 += lines[in];
+						}
+					}
+				}
 				System.out.println(stuff1);
 			}
 			
@@ -53,5 +70,13 @@ public class HTMLParser2000 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	private static int[] range(int start, int stop){
+	   int[] result = new int[stop-start];
+
+	   for(int i=1;i<stop-start;i++)
+	      result[i] = start+i;
+
+	   return result;
 	}
 }
