@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.jsoup.*;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 /**
  * Hello world!
  *
@@ -14,8 +15,9 @@ public class App {
     	File f = new File("/home/maniloni/Senior Project/World Factbook Data/2000/wfbfull/factbook/geos/aa.html");
     	try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
+			Elements ee = d.select("p");
+			System.out.println(ee);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         System.out.println( "Hello World!" );
