@@ -3,6 +3,7 @@ package parser2000;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,7 +33,8 @@ public class HTMLParser2000 {
 				else continue;
 			}
 			
-			ArrayList<Tuple<String, String>> info = new ArrayList<Tuple<String, String>>();
+			//ArrayList<Tuple<String, String>> info = new ArrayList<Tuple<String, String>>();
+			HashMap<String, String> info = new HashMap<String, String>();
 			
 			
 			for(int i =0; i<titles.size(); i++) {
@@ -43,7 +45,7 @@ public class HTMLParser2000 {
 				String topic = stuff.substring(b+3, e-1);
 				
 				String stuff1 = stuff.substring(e+4);
-				System.out.println(topic);
+				//System.out.println(topic);
 				
 				
 				int thisIndex = t.getY();
@@ -61,8 +63,11 @@ public class HTMLParser2000 {
 						}
 					}
 				}
-				System.out.println(stuff1);
+				
+				info.put(stuff, stuff1);
 			}
+			
+			System.out.println(info.get("Coastline"));
 			
 			//System.out.println(titles.size());
 			//System.out.println(titles.get(1));
