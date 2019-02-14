@@ -41,7 +41,10 @@ public class HTMLParser2000 {
 				int b = stuff.indexOf("<b>");
 				int e = stuff.indexOf("</b>");
 				String topic = stuff.substring(b+3, e-1);
+				
+				String stuff1 = stuff.substring(e+4);
 				System.out.println(topic);
+				System.out.println(stuff1);
 			}
 			
 			//System.out.println(titles.size());
