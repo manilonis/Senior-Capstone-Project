@@ -8,6 +8,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import generalHelpers.Tuple;
+
 public class HTMLParser2000 {
 	public static void parse() {
 		File f = new File("/home/maniloni/Senior Project/World Factbook Data/2000/wfbfull/factbook/geos/aa.html");
@@ -20,12 +22,12 @@ public class HTMLParser2000 {
 			//System.out.println(lines.length);
 			//System.out.println(lines[0]);
 			
-			ArrayList<String> titles = new ArrayList<String>();
+			ArrayList<Tuple<String, Integer>> titles = new ArrayList<Tuple<String, Integer>>();
 			
 			for(int i=0; i<lines.length; i++) {
 				String s = lines[i];
 				if (s.indexOf("</b>") >= 0){
-					titles.add(s);
+					titles.add(new Tuple<String, Integer>(s, i));
 				}
 				else continue;
 			}
