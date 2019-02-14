@@ -16,7 +16,12 @@ public class App {
     	try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements ee = d.select("p");
-			System.out.println(ee.html());
+			//System.out.println(ee.html());
+			String p = ee.html();
+			String[] lines = p.split("\n");
+			System.out.println(lines.length);
+			System.out.println(lines[0]);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
