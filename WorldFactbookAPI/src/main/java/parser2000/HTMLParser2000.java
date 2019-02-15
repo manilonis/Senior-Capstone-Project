@@ -19,6 +19,7 @@ public class HTMLParser2000 {
 			Elements ee = d.select("p");
 			Elements top = d.select("b");
 			System.out.println(top.html());
+			System.out.println(top.outerHtml());
 			//System.out.println(ee.html());
 			String p = ee.html();
 			String[] lines = p.split("\n");
