@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import generalHelpers.Tuple;
@@ -18,23 +20,25 @@ public class HTMLParser2000 {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements ee = d.select("p");
 			Elements top = d.select("b");
-			System.out.println(top.html());
-			System.out.println(top.outerHtml());
+			System.out.println(top.first().html());
 			//System.out.println(ee.html());
 			String p = ee.html();
 			String[] lines = p.split("\n");
 			//System.out.println(lines.length);
 			//System.out.println(lines[0]);
 			
+			Node after = top.first().nextSibling();
+			System.out.println(after);
+			
 			ArrayList<Tuple<String, Integer>> titles = new ArrayList<Tuple<String, Integer>>();
 			
-			for(int i=0; i<lines.length; i++) {
+			/*for(int i=0; i<lines.length; i++) {
 				String s = lines[i];
 				if (s.indexOf("</b>") >= 0){
 					titles.add(new Tuple<String, Integer>(s, i));
 				}
 				else continue;
-			}
+			}*/
 			
 			//ArrayList<Tuple<String, String>> info = new ArrayList<Tuple<String, String>>();
 			HashMap<String, String> info = new HashMap<String, String>();
