@@ -92,7 +92,8 @@ public class HTMLParser2000 {
 		System.out.println(topic_array[5]);
 		//System.out.println(all.html());
 		System.out.println(all_lines.length);
-		System.out.println(Arrays.toString(all_lines));
+		System.out.println(topic_array.length);
+		//System.out.println(Arrays.toString(all_lines));
 		return null;
 	}
 	
