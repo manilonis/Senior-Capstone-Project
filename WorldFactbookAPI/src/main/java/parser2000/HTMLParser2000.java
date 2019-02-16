@@ -89,7 +89,7 @@ public class HTMLParser2000 {
 		String[] topic_array =  topics.html().split("\n");
 		String[] all_lines = all.html().split("</p>");
 		System.out.println(topic_array[5]);
-		System.out.println(all_lines[100]);
+		System.out.println(all_lines.length);
 		return null;
 	}
 	
