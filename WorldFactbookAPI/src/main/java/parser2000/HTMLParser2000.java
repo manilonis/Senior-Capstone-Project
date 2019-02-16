@@ -3,6 +3,7 @@ package parser2000;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,8 +90,9 @@ public class HTMLParser2000 {
 		String[] topic_array =  topics.html().split("\n");
 		String[] all_lines = all.html().split("<b>");
 		System.out.println(topic_array[5]);
-		System.out.println(all.html());
+		//System.out.println(all.html());
 		System.out.println(all_lines.length);
+		System.out.println(Arrays.toString(all_lines));
 		return null;
 	}
 	
