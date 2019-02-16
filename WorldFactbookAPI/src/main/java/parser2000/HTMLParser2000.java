@@ -87,8 +87,8 @@ public class HTMLParser2000 {
 	
 	private static ArrayList<String> grabInfo(Elements topics, Elements all){
 		String[] topic_array =  topics.html().split("\n");
-		String[] all_lines = all.outerHtml().split("\n");
-		System.out.println(topic_array[0]);
+		String[] all_lines = all.html().split("\n");
+		System.out.println(topic_array[5]);
 		System.out.println(all_lines[0]);
 		return null;
 	}
