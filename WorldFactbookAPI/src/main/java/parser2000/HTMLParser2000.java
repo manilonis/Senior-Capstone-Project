@@ -109,6 +109,7 @@ public class HTMLParser2000 {
 		System.out.println(topic_array.length + "   " + alls.size());
 		
 		int arrayListCount = 1;
+		HashMap<String, String> allData = new HashMap<String, String>();
 		for(int i=0; i<topic_array.length; i++) {
 			if (topic_array[i].contains("</a>") || (topic_array[i]).contains("</font>")){
 				continue;
@@ -122,10 +123,12 @@ public class HTMLParser2000 {
 			}
 			
 			if (a!= null) {
+				allData.put(topic_array[i],a);
 				System.out.println("Header: " + topic_array[i] + " " + "Body: " + a);
 			}
 			else System.out.println("Extra Header: " + topic_array[i]);
 		}
+		System.out.println(allData.size());
 		
 		
 		return null;
