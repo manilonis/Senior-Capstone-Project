@@ -92,6 +92,7 @@ public class HTMLParser2000 {
 		ArrayList<String> alls = new ArrayList<String>();
 		for(String s: allFirstSplit) {
 			int c = s.indexOf("<b>");
+			if (c >= 0)
 			alls.add(s.substring(0,c));
 		}
 		System.out.println(alls.toString());
