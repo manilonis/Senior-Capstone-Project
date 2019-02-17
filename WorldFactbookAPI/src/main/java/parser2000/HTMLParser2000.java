@@ -95,9 +95,24 @@ public class HTMLParser2000 {
 			if (c >= 0)
 			alls.add(s.substring(0,c));
 		}
-		System.out.println(alls.toString());
+		//System.out.println(alls.toString());
 		String[] topic_array =  topics.html().split("\n");
 		System.out.println(topic_array.length + "   " + alls.size());
+		
+		for(int i=0; i<topic_array.length; i++) {
+			String a;
+			try {
+				a = alls.get(i);
+			}catch(IndexOutOfBoundsException ae) {
+				a = null;
+			}
+			
+			if (a!= null) {
+				System.out.println(topic_array[i] + " " + a);
+			}
+			else System.out.println(topic_array[i]);
+		}
+		
 		
 		return null;
 	}
