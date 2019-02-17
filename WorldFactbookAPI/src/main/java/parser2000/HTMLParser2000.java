@@ -94,6 +94,7 @@ public class HTMLParser2000 {
 		System.out.println(all_lines.length);
 		System.out.println(topic_array.length);
 		System.out.println(all_lines[50]);
+		System.out.println(Arrays.toString(all_lines));
 		int count =0;
 		for(String s: all_lines) {
 			if(s.length() >0 ) {
