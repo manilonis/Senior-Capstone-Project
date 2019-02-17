@@ -1,25 +1,21 @@
 package parser2000;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
-
-import generalHelpers.Tuple;
 
 public class HTMLParser2000 {
 	public static void parse() {
 		File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2000/wfbfull/factbook/geos/");
 		File[] files = folder.listFiles();
-		// File f = new File("/home/maniloni/Senior Project/World Factbook
-		// Data/2000/wfbfull/factbook/geos/aa.html");
+		HashMap<String, HashMap<String, String>> countries = new HashMap<String, HashMap<String, String>>();
 
 		for (File f : files) {
 			try {
@@ -30,13 +26,24 @@ public class HTMLParser2000 {
 				Elements ee = d.select("p");
 				Elements top = d.select("b");
 				data = grabInfo(top, ee);
-				if(f.getName().contains("fg")) {
-					System.out.println(data.toString());
-				}
-
+				countries.put(f.getName(), data);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		try {
+			FileOutputStream fileout = new FileOutputStream("/home/Senior Project/serialized_data/2000.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileout);
+			out.writeObject(countries);
+			
+			fileout.close();
+			out.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -78,17 +85,7 @@ public class HTMLParser2000 {
 			} else
 				System.out.println("Extra Header: " + topic_array[i]);
 		}
-		System.out.println(allData.size());
 
 		return allData;
-	}
-
-	private static int[] range(int start, int stop) {
-		int[] result = new int[stop - start];
-
-		for (int i = 1; i < stop - start; i++)
-			result[i] = start + i;
-
-		return result;
 	}
 }
