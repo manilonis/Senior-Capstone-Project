@@ -97,8 +97,7 @@ public class HTMLParser2000 {
 		}
 		System.out.println(alls.toString());
 		String[] topic_array =  topics.html().split("\n");
-		String[] all_lines = all.html().split("[<b>[.+]</b>]");
-		String[] first = all.html().split("<b>");
+		System.out.println(topic_array.length + "   " + alls.size());
 		
 		return null;
 	}
