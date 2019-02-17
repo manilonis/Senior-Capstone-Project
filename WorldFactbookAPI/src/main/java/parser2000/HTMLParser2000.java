@@ -91,6 +91,7 @@ public class HTMLParser2000 {
 		String[] allFirstSplit = allHTML.split("</b>");
 		ArrayList<String> alls = new ArrayList<String>();
 		for(String s: allFirstSplit) {
+			if (s.contains("30 N")) System.out.println("IT IS HERE");
 			int c = s.indexOf("<b>");
 			if (c >= 0) {
 				//if (s.contains("Top of Page")) continue;
