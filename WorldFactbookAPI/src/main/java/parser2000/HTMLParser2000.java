@@ -108,9 +108,9 @@ public class HTMLParser2000 {
 			}
 			
 			if (a!= null) {
-				System.out.println(topic_array[i] + " " + a);
+				System.out.println("Header: " + topic_array[i] + " " + "Body: " + a);
 			}
-			else System.out.println(topic_array[i]);
+			else System.out.println("Extra Header: " + topic_array[i]);
 		}
 		
 		
