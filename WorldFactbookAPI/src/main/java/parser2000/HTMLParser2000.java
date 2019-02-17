@@ -91,6 +91,10 @@ public class HTMLParser2000 {
 		String[] allFirstSplit = allHTML.split("</b>");
 		ArrayList<String> alls = new ArrayList<String>();
 		for(String s: allFirstSplit) {
+			if(s.equals(allFirstSplit[allFirstSplit.length-1])) {
+				alls.add(s);
+				continue;
+			}
 			//if (s.contains("30 N")) System.out.println("IT IS HERE" + s + " " + s.indexOf("<b>"));
 			int c = s.indexOf("<b>");
 			if (c >= 0) {
