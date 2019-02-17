@@ -98,10 +98,9 @@ public class HTMLParser2000 {
 				//if (s.contains("Top of Page")) continue;
 				else alls.add(s.substring(0,c));
 				
-				if (s.contains("30 N")) System.out.println(alls.contains(s.substring(0,c)));
+				if (s.contains("drug-money-laundering")) System.out.println(alls.contains(s.substring(0,c)));
 			}
 		}
-		//System.out.println(alls.toString());
 		String[] topic_array =  topics.html().split("\n");
 		System.out.println(topic_array.length + "   " + alls.size());
 		
