@@ -25,7 +25,7 @@ public class HTMLParser2002 {
 			String[] divs = div.html().split("\n");
 			ArrayList<String> topics = new ArrayList<String>();
 			for (String s: divs) {
-				if(s.indexOf('<') == 0) continue;
+				if(s.contains("<")) continue;
 				else topics.add(s);
 			}
 			
