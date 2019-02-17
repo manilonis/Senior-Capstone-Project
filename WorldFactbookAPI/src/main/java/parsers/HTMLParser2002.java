@@ -29,8 +29,15 @@ public class HTMLParser2002 {
 				else topics.add(s.trim());
 			}
 			String[] breaks = e.html().split("</td>");
-			System.out.println(Arrays.toString(breaks));
-			System.out.println(topics.toString());
+			ArrayList<String> data = new ArrayList<String>();
+			for (String str: breaks) {
+				int c = str.indexOf("</a>");
+				if (c>=0) {
+					data.add(str.substring(c+4));
+				}
+			}
+			System.out.println(data.toString());
+			//System.out.println(topics.toString());
 			
 		}catch(IOException ie) {
 			
