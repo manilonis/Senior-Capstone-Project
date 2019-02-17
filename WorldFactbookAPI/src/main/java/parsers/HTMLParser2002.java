@@ -24,6 +24,7 @@ public class HTMLParser2002 {
 		for(File f: files) {
 			try {
 				if (!f.getName().endsWith(".html")) continue;
+				if(f.getName().equals("index.html")) continue;
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
 				whole2002.put(f.getName(), parseCountry(d));
 				System.out.println("Done " + f.getName());
@@ -62,7 +63,6 @@ public class HTMLParser2002 {
 		System.out.println("Sizes: " + topics.size() + "   " + data.size());
 		if(topics.size()!= data.size()) System.out.println("Error at " + d.baseUri());
 		for(int i=0; i<topics.size(); i++) {
-			System.out.println("Header: " + topics.get(i) + "Body: "+ data.get(i));
 			allData.put(topics.get(i), data.get(i));
 		}
 		return allData;
