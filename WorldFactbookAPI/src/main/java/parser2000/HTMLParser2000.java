@@ -96,6 +96,7 @@ public class HTMLParser2000 {
 		}
 		String[] second = total.split("</b>");
 		System.out.println(Arrays.toString(second));
+		System.out.println(second[0] + "    "+ second[1]);
 		/*System.out.println(Arrays.toString(topic_array));
 		System.out.println(all_lines.length);
 		System.out.println(topic_array.length);
