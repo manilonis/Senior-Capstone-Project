@@ -89,20 +89,26 @@ public class HTMLParser2000 {
 	private static ArrayList<String> grabInfo(Elements topics, Elements all){
 		String[] topic_array =  topics.html().split("\n");
 		String[] all_lines = all.html().split("[<b>[.+]</b>]");
-		//System.out.println(topic_array[5]);
-		System.out.println(Arrays.toString(topic_array));
+		String[] first = all.html().split("<b>");
+		String total = "";
+		for (String str: first) {
+			total += str;
+		}
+		String[] second = total.split("</b>");
+		System.out.println(Arrays.toString(second));
+		/*System.out.println(Arrays.toString(topic_array));
 		System.out.println(all_lines.length);
 		System.out.println(topic_array.length);
 		System.out.println(all_lines[50]);
 		System.out.println(Arrays.toString(all_lines));
-		int count =0;
+		int count = 0;
 		for(String s: all_lines) {
 			if(s.length() >0 ) {
 				count++;
 				//System.out.println(s.length());
 			}
 		}
-		System.out.println(count);
+		System.out.println(count);*/
 		return null;
 	}
 	
