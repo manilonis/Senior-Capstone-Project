@@ -34,6 +34,7 @@ public class HTMLParser2002 {
 				int c = str.lastIndexOf("</a>");
 				if (c>=0) {
 					String temp = str.substring(c+4);
+					if (temp.contains("</font>") || temp.contains("</div>")) continue;
 					if(temp.lastIndexOf("<br>") >=0 ) data.add(temp.substring(temp.lastIndexOf("<br>")+4).trim());
 					else data.add(str.substring(c+4).trim());
 				}
