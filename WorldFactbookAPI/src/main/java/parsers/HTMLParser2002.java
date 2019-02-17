@@ -18,7 +18,9 @@ public class HTMLParser2002 {
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements e = d.select("td");
+			Elements div = d.select("div");
 			System.out.println(e.html());
+			System.out.println(div.html());
 			
 		}catch(IOException ie) {
 			
