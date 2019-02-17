@@ -100,6 +100,9 @@ public class HTMLParser2000 {
 		System.out.println(topic_array.length + "   " + alls.size());
 		
 		for(int i=0; i<topic_array.length; i++) {
+			if (topic_array[i].contains("</a>")){
+				continue;
+			}
 			String a;
 			try {
 				a = alls.get(i);
