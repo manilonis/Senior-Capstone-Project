@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -66,7 +67,7 @@ public class HTMLParser2000 {
 		}
 		}
 		else {
-			System.out.println(countries.size());
+			System.out.println(Arrays.toString(countries.keySet().toArray()));
 		}
 	}
 
