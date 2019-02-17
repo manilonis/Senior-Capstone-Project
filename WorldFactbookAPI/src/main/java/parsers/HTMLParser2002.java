@@ -33,7 +33,9 @@ public class HTMLParser2002 {
 			for (String str: breaks) {
 				int c = str.lastIndexOf("</a>");
 				if (c>=0) {
-					data.add(str.substring(c+4));
+					String temp = str.substring(c+4);
+					if(temp.lastIndexOf("<br>") >=0 ) data.add(temp.substring(temp.lastIndexOf("<br>")+4).trim());
+					else data.add(str.substring(c+4).trim());
 				}
 			}
 			System.out.println(data.toString());
