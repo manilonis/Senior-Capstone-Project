@@ -26,10 +26,10 @@ public class HTMLParser2002 {
 			ArrayList<String> topics = new ArrayList<String>();
 			for (String s: divs) {
 				if(s.contains("<")) continue;
-				else topics.add(s);
+				else topics.add(s.trim());
 			}
-			
-			System.out.println(e.html());
+			String[] breaks = e.html().split("<br>");
+			System.out.println(Arrays.toString(breaks));
 			System.out.println(topics.toString());
 			
 		}catch(IOException ie) {
