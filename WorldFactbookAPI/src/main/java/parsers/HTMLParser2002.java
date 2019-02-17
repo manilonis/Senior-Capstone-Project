@@ -5,7 +5,12 @@
 package parsers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,10 +21,31 @@ import org.jsoup.select.Elements;
 
 public class HTMLParser2002 {
 	public static void parse() {
+		boolean filesLoaded = true;
+
+		HashMap<String, HashMap<String, String>> whole2002 = null;
+		
+		try {
+			FileInputStream filein = new FileInputStream("/home/maniloni/Senior Project/serialized_data/2002.ser");
+			ObjectInputStream oin = new ObjectInputStream(filein);
+			
+			whole2002 = (HashMap<String, HashMap<String, String>>) oin.readObject();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+			filesLoaded = false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			filesLoaded = false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("ERROR EXITING");
+			System.exit(0);
+		}
+		if(!filesLoaded) {
 		File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2002/geos/");
 		File[] files = folder.listFiles();
 		
-		HashMap<String, HashMap<String, String>> whole2002 = new HashMap<String, HashMap<String, String>>();
+		whole2002 = new HashMap<String, HashMap<String, String>>();
 		
 		for(File f: files) {
 			try {
@@ -34,6 +60,18 @@ public class HTMLParser2002 {
 		}
 		System.out.println(whole2002.size());
 		
+		try {
+		FileOutputStream fileout = new FileOutputStream("/home/maniloni/Senior Project/serialized_data/2002.ser");
+		ObjectOutputStream out = new ObjectOutputStream(fileout);
+		
+		out.writeObject(whole2002);
+		
+		fileout.close();
+		out.close();
+		}catch(IOException ie) {
+			ie.printStackTrace();
+		}
+		}
 		
 	}
 	
