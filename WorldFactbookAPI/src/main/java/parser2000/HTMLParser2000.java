@@ -94,8 +94,9 @@ public class HTMLParser2000 {
 			if (s.contains("30 N")) System.out.println("IT IS HERE" + s + " " + s.indexOf("<b>"));
 			int c = s.indexOf("<b>");
 			if (c >= 0) {
+				if (c==0) alls.add(s.substring(3));
 				//if (s.contains("Top of Page")) continue;
-			alls.add(s.substring(0,c));
+				else alls.add(s.substring(0,c));
 			}
 		}
 		//System.out.println(alls.toString());
