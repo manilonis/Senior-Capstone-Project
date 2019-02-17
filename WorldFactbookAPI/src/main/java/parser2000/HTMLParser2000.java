@@ -23,12 +23,16 @@ public class HTMLParser2000 {
 
 		for (File f : files) {
 			try {
+				HashMap<String, String> data;
 				System.out.println(f.getName());
 				if(!f.getName().endsWith(".html")) continue;
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
 				Elements ee = d.select("p");
 				Elements top = d.select("b");
-				grabInfo(top, ee);
+				data = grabInfo(top, ee);
+				if(f.getName().contains("fg")) {
+					System.out.println(data.toString());
+				}
 
 			} catch (IOException e) {
 				e.printStackTrace();
