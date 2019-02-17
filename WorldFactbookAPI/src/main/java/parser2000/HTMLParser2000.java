@@ -105,7 +105,7 @@ public class HTMLParser2000 {
 		String[] topic_array =  topics.html().split("\n");
 		System.out.println(topic_array.length + "   " + alls.size());
 		
-		int arrayListCount = 0;
+		int arrayListCount = 1;
 		for(int i=0; i<topic_array.length; i++) {
 			if (topic_array[i].contains("</a>") || (topic_array[i]).contains("</font>")){
 				continue;
