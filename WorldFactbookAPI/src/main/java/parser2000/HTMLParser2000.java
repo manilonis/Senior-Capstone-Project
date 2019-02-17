@@ -93,15 +93,15 @@ public class HTMLParser2000 {
 		System.out.println(Arrays.toString(topic_array));
 		System.out.println(all_lines.length);
 		System.out.println(topic_array.length);
-		System.out.println(all_lines[50].length());
+		System.out.println(all_lines[50]);
 		int count =0;
 		for(String s: all_lines) {
 			if(s.length() >0 ) {
 				count++;
-				System.out.println(s.length());
+				//System.out.println(s.length());
 			}
 		}
-		//System.out.println(count);
+		System.out.println(count);
 		return null;
 	}
 	
