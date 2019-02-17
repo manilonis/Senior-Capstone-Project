@@ -39,8 +39,11 @@ public class HTMLParser2002 {
 					else data.add(str.substring(c+4).trim());
 				}
 			}
-			System.out.println(data.toString());
+			//System.out.println(data.toString());
 			//System.out.println(topics.toString());
+			
+			System.out.println("Sizes: " + topics.size() + "   " + data.size());
+			
 			
 		}catch(IOException ie) {
 			
