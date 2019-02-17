@@ -93,7 +93,7 @@ public class HTMLParser2000 {
 		for(String s: allFirstSplit) {
 			int c = s.indexOf("<b>");
 			if (c >= 0) {
-				if (s.contains("</a>")) continue;
+				if (s.contains("Top of Page")) continue;
 			alls.add(s.substring(0,c));
 			}
 		}
