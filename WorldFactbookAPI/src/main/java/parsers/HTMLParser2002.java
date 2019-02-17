@@ -6,6 +6,7 @@ package parsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.jsoup.Jsoup;
@@ -20,10 +21,16 @@ public class HTMLParser2002 {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements e = d.select("td");
 			Elements div = d.select("div");
+			
 			String[] divs = div.html().split("\n");
+			ArrayList<String> topics = new ArrayList<String>();
+			for (String s: divs) {
+				if(s.indexOf('<') == 0) continue;
+				else topics.add(s);
+			}
 			
 			System.out.println(e.html());
-			System.out.println(Arrays.toString(divs));
+			System.out.println(topics.toString());
 			
 		}catch(IOException ie) {
 			
