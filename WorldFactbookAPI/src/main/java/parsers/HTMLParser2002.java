@@ -19,7 +19,7 @@ public class HTMLParser2002 {
 		
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
-			Elements e = d.select("td");
+			Elements e = d.select("tr");
 			Elements div = d.select("div");
 			
 			String[] divs = div.html().split("\n");
@@ -29,7 +29,7 @@ public class HTMLParser2002 {
 				else topics.add(s.trim());
 			}
 			String[] breaks = e.html().split("\n");
-			System.out.println(Arrays.toString(breaks));
+			System.out.println(e.html());
 			System.out.println(topics.toString());
 			
 		}catch(IOException ie) {
