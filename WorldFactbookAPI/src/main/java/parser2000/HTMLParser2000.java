@@ -98,8 +98,8 @@ public class HTMLParser2000 {
 		for(String s: all_lines) {
 			if(s.length() >0 ) {
 				count++;
-			System.out.println(s);
 			}
+			else System.out.println(s);
 		}
 		System.out.println(count);
 		return null;
