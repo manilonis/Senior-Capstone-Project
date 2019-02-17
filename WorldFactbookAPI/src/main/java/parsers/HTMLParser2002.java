@@ -28,8 +28,8 @@ public class HTMLParser2002 {
 				if(s.contains("<") || s.contains("nbsp")) continue;
 				else topics.add(s.trim());
 			}
-			String[] breaks = e.html().split("\n");
-			System.out.println(e.html());
+			String[] breaks = e.html().split("</td>");
+			System.out.println(Arrays.toString(breaks));
 			System.out.println(topics.toString());
 			
 		}catch(IOException ie) {
