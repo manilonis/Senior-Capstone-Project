@@ -25,10 +25,10 @@ public class HTMLParser2002 {
 			String[] divs = div.html().split("\n");
 			ArrayList<String> topics = new ArrayList<String>();
 			for (String s: divs) {
-				if(s.contains("<")) continue;
+				if(s.contains("<") || s.contains("nbsp")) continue;
 				else topics.add(s.trim());
 			}
-			String[] breaks = e.html().split("<br>");
+			String[] breaks = e.html().split("\n");
 			System.out.println(Arrays.toString(breaks));
 			System.out.println(topics.toString());
 			
