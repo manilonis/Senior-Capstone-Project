@@ -89,11 +89,11 @@ public class HTMLParser2000 {
 	private static ArrayList<String> grabInfo(Elements topics, Elements all){
 		String[] topic_array =  topics.html().split("\n");
 		String[] all_lines = all.html().split("<b>\\S+</b>");
-		System.out.println(topic_array[5]);
-		//System.out.println(all.html());
+		//System.out.println(topic_array[5]);
+		System.out.println(Arrays.toString(topic_array));
 		System.out.println(all_lines.length);
 		System.out.println(topic_array.length);
-		//System.out.println(Arrays.toString(all_lines));
+		System.out.println(Arrays.toString(all_lines));
 		return null;
 	}
 	
