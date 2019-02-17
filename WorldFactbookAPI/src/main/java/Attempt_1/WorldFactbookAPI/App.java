@@ -1,6 +1,6 @@
 package Attempt_1.WorldFactbookAPI;
 
-import parser2000.HTMLParser2000;
+import parsers.HTMLParser2000;
 
 public class App {
     public static void main(String[] args){
