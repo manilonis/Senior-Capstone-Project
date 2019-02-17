@@ -67,7 +67,7 @@ public class HTMLParser2000 {
 		}
 		}
 		else {
-			System.out.println(Arrays.toString(countries.keySet().toArray()));
+			System.out.println(countries.size());
 		}
 	}
 
