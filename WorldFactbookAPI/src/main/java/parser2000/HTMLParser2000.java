@@ -99,7 +99,7 @@ public class HTMLParser2000 {
 			if(s.length() >0 ) {
 				count++;
 			}
-			else System.out.println(s);
+			else System.out.println(s.length());
 		}
 		System.out.println(count);
 		return null;
