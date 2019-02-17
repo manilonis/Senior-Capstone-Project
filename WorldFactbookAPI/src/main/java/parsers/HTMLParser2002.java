@@ -34,7 +34,7 @@ public class HTMLParser2002 {
 				int c = str.lastIndexOf("</a>");
 				if (c>=0) {
 					String temp = str.substring(c+4);
-					if (temp.contains("</font>") || temp.contains("</div>")) continue;
+					if (temp.contains("</font>") || temp.contains("</div>") || temp.endsWith("</p>")) continue;
 					if(temp.lastIndexOf("<br>") >=0 ) data.add(temp.substring(temp.lastIndexOf("<br>")+4).trim());
 					else data.add(str.substring(c+4).trim());
 				}
@@ -43,10 +43,13 @@ public class HTMLParser2002 {
 			//System.out.println(topics.toString());
 			
 			System.out.println("Sizes: " + topics.size() + "   " + data.size());
+			for(int i=0; i<topics.size(); i++) {
+				System.out.println("Header: " + topics.get(i) + "Body: "+ data.get(i));
+			}
 			
 			
 		}catch(IOException ie) {
-			
+			ie.printStackTrace();
 		}
 	}
 }
