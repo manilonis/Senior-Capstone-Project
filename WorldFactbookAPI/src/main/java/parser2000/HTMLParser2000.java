@@ -33,7 +33,7 @@ public class HTMLParser2000 {
 			}
 		}
 		try {
-			FileOutputStream fileout = new FileOutputStream("/home/Senior Project/serialized_data/2000.ser");
+			FileOutputStream fileout = new FileOutputStream("/home/maniloni/Senior Project/serialized_data/2000.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileout);
 			out.writeObject(countries);
 			
