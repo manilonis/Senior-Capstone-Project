@@ -6,6 +6,7 @@ package parsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,8 +20,10 @@ public class HTMLParser2002 {
 			Document d = Jsoup.parse(f, "UTF-8", "aa");
 			Elements e = d.select("td");
 			Elements div = d.select("div");
+			String[] divs = div.html().split("\n");
+			
 			System.out.println(e.html());
-			System.out.println(div.html());
+			System.out.println(Arrays.toString(divs));
 			
 		}catch(IOException ie) {
 			
