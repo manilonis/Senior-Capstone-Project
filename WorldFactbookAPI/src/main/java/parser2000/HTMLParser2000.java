@@ -92,15 +92,17 @@ public class HTMLParser2000 {
 		ArrayList<String> alls = new ArrayList<String>();
 		for(String s: allFirstSplit) {
 			int c = s.indexOf("<b>");
-			if (c >= 0)
+			if (c >= 0) {
+				if (s.contains("</a>")) continue;
 			alls.add(s.substring(0,c));
+			}
 		}
 		//System.out.println(alls.toString());
 		String[] topic_array =  topics.html().split("\n");
 		System.out.println(topic_array.length + "   " + alls.size());
 		
 		for(int i=0; i<topic_array.length; i++) {
-			if (topic_array[i].contains("</a>")){
+			if (topic_array[i].contains("</a>") || (topic_array[i]).contains("</font>")){
 				continue;
 			}
 			String a;
