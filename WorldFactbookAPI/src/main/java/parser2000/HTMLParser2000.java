@@ -23,6 +23,7 @@ public class HTMLParser2000 {
 
 		for (File f : files) {
 			try {
+				System.out.println(f.getName());
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
 				Elements ee = d.select("p");
 				Elements top = d.select("b");
