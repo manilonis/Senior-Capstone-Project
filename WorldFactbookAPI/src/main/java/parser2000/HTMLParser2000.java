@@ -1,9 +1,11 @@
 package parser2000;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,9 +15,26 @@ import org.jsoup.select.Elements;
 
 public class HTMLParser2000 {
 	public static void parse() {
+		boolean filegot = true;
+		HashMap<String, HashMap<String, String>> countries = null;
+		try {
+			FileInputStream fin = new FileInputStream("/home/maniloni/Senior Project/serialized_data/2000.ser");
+			ObjectInputStream oin = new ObjectInputStream(fin);
+			
+			countries = (HashMap<String, HashMap<String, String>>) oin.readObject();
+		}catch(IOException io) {
+			io.printStackTrace();
+			filegot = false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("ERROR");
+			System.exit(0);
+		}
+		if (!filegot) {
+		System.out.println("Grabbing Files");
 		File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2000/wfbfull/factbook/geos/");
 		File[] files = folder.listFiles();
-		HashMap<String, HashMap<String, String>> countries = new HashMap<String, HashMap<String, String>>();
+		countries = new HashMap<String, HashMap<String, String>>();
 
 		for (File f : files) {
 			try {
@@ -44,6 +63,10 @@ public class HTMLParser2000 {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		}
+		else {
+			System.out.println(countries.size());
 		}
 	}
 
