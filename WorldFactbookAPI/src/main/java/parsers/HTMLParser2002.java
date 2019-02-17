@@ -31,7 +31,7 @@ public class HTMLParser2002 {
 			String[] breaks = e.html().split("</td>");
 			ArrayList<String> data = new ArrayList<String>();
 			for (String str: breaks) {
-				int c = str.indexOf("</a>");
+				int c = str.lastIndexOf("</a>");
 				if (c>=0) {
 					data.add(str.substring(c+4));
 				}
