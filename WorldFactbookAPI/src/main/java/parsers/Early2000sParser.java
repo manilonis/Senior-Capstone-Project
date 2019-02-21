@@ -107,8 +107,10 @@ public class Early2000sParser {
 		HashMap<String, String> allData = new HashMap<String, String>();
 
 		System.out.println("Sizes: " + topics.size() + "   " + data.size());
-		if (topics.size() != data.size())
+		if (topics.size() != data.size()) {
+			System.out.println(data.toString());
 			System.out.println("Error at " + d.baseUri());
+		}
 		for (int i = 0; i < topics.size(); i++) {
 			allData.put(topics.get(i), data.get(i));
 		}
