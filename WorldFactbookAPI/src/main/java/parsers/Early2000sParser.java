@@ -100,7 +100,7 @@ public class Early2000sParser {
 					continue;
 				if (d.baseUri().equals("ee.html")) {
 					if(temp.contains("Following the two")) {
-						data.add(temp.substring(0, temp.indexOf("</table>")));
+						data.add(temp);
 						System.out.println("EXCEPTION HIT");
 						continue;
 					}
