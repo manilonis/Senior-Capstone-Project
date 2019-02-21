@@ -13,8 +13,9 @@ public class App {
     	Early2000sParser.parse("2003", "/home/maniloni/Senior Project/World Factbook Data/2003/geos/");
     	System.out.println("2004 going");
     	Early2000sParser.parse("2004", "/home/maniloni/Senior Project/World Factbook Data/2004/factbook/geos/");
-    	/*Early2000sParser.parse("2005", "/home/maniloni/Senior Project/World Factbook Data/2005/factbook/geos/");
-    	Early2000sParser.parse("2006", "/home/maniloni/Senior Project/World Factbook Data/2006/factbook/geos/");*/
+    	System.out.println("2005 going");
+    	Early2000sParser.parse("2005", "/home/maniloni/Senior Project/World Factbook Data/2005/factbook/geos/");
+    	/*Early2000sParser.parse("2006", "/home/maniloni/Senior Project/World Factbook Data/2006/factbook/geos/");*/
     	//HTMLParser2002.parse();
         System.out.println("Completed");
     }
