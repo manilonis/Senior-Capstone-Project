@@ -96,7 +96,7 @@ public class Early2000sParser {
 			int c = str.lastIndexOf("</a>");
 			if (c >= 0) {
 				String temp = str.substring(c + 4);
-				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>"))
+				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
 				if (temp.lastIndexOf("<br>") >= 0)
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
