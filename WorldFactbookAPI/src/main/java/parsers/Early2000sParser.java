@@ -99,8 +99,9 @@ public class Early2000sParser {
 				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
 				if (d.baseUri().equals("ee.html")) {
-					if(temp.contains("Following the two devestating")) {
+					if(temp.contains("Following the two")) {
 						data.add(temp.substring(0, temp.indexOf("</table>")));
+						System.out.println("EXCEPTION HIT");
 						continue;
 					}
 				}
