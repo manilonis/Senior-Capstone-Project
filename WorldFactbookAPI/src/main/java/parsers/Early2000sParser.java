@@ -1,6 +1,6 @@
 /**
  * Michael E Anilonis
- * Feb 17, 2019
+ * Feb 21, 2019
  */
 package parsers;
 
@@ -12,24 +12,25 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class HTMLParser2002 {
-	public static void parse() {
+public class Early2000sParser {
+	public static void parse(String year, String htmlFolderPath) {
 		boolean filesLoaded = true;
 
-		HashMap<String, HashMap<String, String>> whole2002 = null;
+		HashMap<String, HashMap<String, String>> whole = null;
 
 		try {
-			FileInputStream filein = new FileInputStream("/home/maniloni/Senior Project/serialized_data/2002.ser");
+			FileInputStream filein = new FileInputStream("/home/maniloni/Senior Project/serialized_data/"+year+".ser");
 			ObjectInputStream oin = new ObjectInputStream(filein);
 
-			whole2002 = (HashMap<String, HashMap<String, String>>) oin.readObject();
+			whole = (HashMap<String, HashMap<String, String>>) oin.readObject();
+			filein.close();
+			oin.close();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 			filesLoaded = false;
@@ -42,10 +43,10 @@ public class HTMLParser2002 {
 			System.exit(0);
 		}
 		if (!filesLoaded) {
-			File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2002/geos/");
+			File folder = new File(htmlFolderPath);
 			File[] files = folder.listFiles();
 
-			whole2002 = new HashMap<String, HashMap<String, String>>();
+			whole = new HashMap<String, HashMap<String, String>>();
 
 			for (File f : files) {
 				try {
@@ -54,20 +55,20 @@ public class HTMLParser2002 {
 					if (f.getName().equals("index.html"))
 						continue;
 					Document d = Jsoup.parse(f, "UTF-8", f.getName());
-					whole2002.put(f.getName(), parseCountry(d));
+					whole.put(f.getName(), parseCountry(d));
 					System.out.println("Done " + f.getName());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			System.out.println(whole2002.size());
+			System.out.println(whole.size());
 
 			try {
 				FileOutputStream fileout = new FileOutputStream(
-						"/home/maniloni/Senior Project/serialized_data/2002.ser");
+						"/home/maniloni/Senior Project/serialized_data/"+year+".ser");
 				ObjectOutputStream out = new ObjectOutputStream(fileout);
 
-				out.writeObject(whole2002);
+				out.writeObject(whole);
 
 				fileout.close();
 				out.close();
@@ -75,9 +76,8 @@ public class HTMLParser2002 {
 				ie.printStackTrace();
 			}
 		}
-
 	}
-
+	
 	private static HashMap<String, String> parseCountry(Document d) {
 		Elements e = d.select("tr");
 		Elements div = d.select("div");
