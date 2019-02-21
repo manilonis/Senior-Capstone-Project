@@ -101,7 +101,7 @@ public class Early2000sParser {
 				if (d.baseUri().equals("ee.html")) {
 					if(temp.contains("Following the two")) {
 						if(!data.contains(temp))data.add(temp);
-						System.out.println("EXCEPTION HIT: " + temp);
+						//System.out.println("EXCEPTION HIT: " + temp);
 						continue;
 					}
 				}
@@ -116,8 +116,8 @@ public class Early2000sParser {
 		System.out.println("Sizes: " + topics.size() + "   " + data.size());
 		if (topics.size() != data.size()) {
 			System.out.println("Error at " + d.baseUri());
-			//System.out.println(topics.toString());
-			System.out.println(data.toString());
+			System.out.println(topics.toString());
+			//System.out.println(data.toString());
 		}
 		for (int i = 0; i < topics.size(); i++) {
 			//DEBUG 
