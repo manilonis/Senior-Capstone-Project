@@ -120,6 +120,11 @@ public class Early2000sParser {
 			System.out.println(data.toString());
 		}
 		for (int i = 0; i < topics.size(); i++) {
+			//DEBUG 
+			if(i >= data.size()){
+				System.out.println("EXTRA HEADER IS: " + topics.get(i));
+				continue;
+			}
 			allData.put(topics.get(i), data.get(i));
 		}
 		if(topics.size() != data.size() || d.baseUri().equals("aa.html")) {
