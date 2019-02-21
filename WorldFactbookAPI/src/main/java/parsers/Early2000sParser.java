@@ -114,6 +114,7 @@ public class Early2000sParser {
 		for (int i = 0; i < topics.size(); i++) {
 			allData.put(topics.get(i), data.get(i));
 		}
+		if(d.baseUri().equals("fg.html")) System.out.println(allData.toString());
 		return allData;
 	}
 }
