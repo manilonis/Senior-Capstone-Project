@@ -121,7 +121,10 @@ public class Early2000sParser {
 			//System.out.println(allData.get(topics.get(0)));
 			///System.out.println(topics.toString());
 			///System.out.println(data.toString());
-			for(int k=0; k<data.size(); k++) System.out.println(k+": "+data.get(k));
+			for(int k=0; k<data.size(); k++) {
+				if(data.get(k).length() == 0) System.out.println(k);
+				System.out.println(k+": "+data.get(k));
+			}
 		}
 		return allData;
 	}
