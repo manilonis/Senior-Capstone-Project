@@ -101,6 +101,7 @@ public class Early2000sParser {
 				if (d.baseUri().equals("ee.html")) {
 					if(temp.contains("Following the two devestating")) {
 						data.add(temp.substring(0, temp.indexOf("</table>")));
+						continue;
 					}
 				}
 				if (temp.lastIndexOf("<br>") >= 0)
