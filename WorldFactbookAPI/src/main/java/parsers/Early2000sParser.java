@@ -93,13 +93,16 @@ public class Early2000sParser {
 		String[] breaks = e.html().split("</td>");
 		ArrayList<String> data = new ArrayList<String>();
 		for (String str : breaks) {
-			int c;
-			if(d.baseUri().equals("ee.html") && str.contains("Following the two devestating")) c = str.lastIndexOf("</table>");
-			else c = str.lastIndexOf("</a>");
+			int c = str.lastIndexOf("</a>");
 			if (c >= 0) {
 				String temp = str.substring(c + 4);
 				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
+				if (d.baseUri().equals("ee.html")) {
+					if(temp.contains("Following the two devestating")) {
+						data.add(temp.substring(0, temp.indexOf("</table>")));
+					}
+				}
 				if (temp.lastIndexOf("<br>") >= 0)
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
 				else
