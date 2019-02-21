@@ -116,6 +116,7 @@ public class Early2000sParser {
 		if(topics.size() != data.size() && d.baseUri().equals("aa.html")) {
 			System.out.println(topics.toString());
 			System.out.println(allData.toString());
+			System.out.println(allData.get(topics.get(0)));
 		}
 		return allData;
 	}
