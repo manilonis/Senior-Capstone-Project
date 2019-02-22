@@ -111,7 +111,7 @@ public class Early2000sParser {
 		if (topics.size() != data.size()) {
 			System.out.println("Error at " + d.baseUri());
 			System.out.println(topics.toString());
-			//System.out.println(data.toString());
+			System.out.println(data.toString());
 		}
 		for (int i = 0; i < topics.size(); i++) {
 			allData.put(topics.get(i), data.get(i));
