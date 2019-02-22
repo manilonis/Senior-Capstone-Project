@@ -104,6 +104,7 @@ public class Early2000sParser {
 					data.add(str.substring(c + 4).trim());
 			}
 		}
+		while(data.contains("")) data.remove("");
 		HashMap<String, String> allData = new HashMap<String, String>();
 
 		System.out.println("Sizes: " + topics.size() + "   " + data.size());
