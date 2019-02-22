@@ -110,10 +110,11 @@ public class Early2000sParser {
 		System.out.println("Sizes: " + topics.size() + "   " + data.size());
 		if (topics.size() != data.size()) {
 			System.out.println("Error at " + d.baseUri());
-			System.out.println(topics.toString());
-			System.out.println(data.toString());
+			//System.out.println(topics.toString());
+			//System.out.println(data.toString());
 		}
 		for (int i = 0; i < topics.size(); i++) {
+			System.out.println("Header: " + topics.get(i) + "Body: " + data.get(i));
 			allData.put(topics.get(i), data.get(i));
 		}
 		if(topics.size() != data.size() && d.baseUri().equals("aa.html")) {
