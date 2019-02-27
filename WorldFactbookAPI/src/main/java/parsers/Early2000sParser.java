@@ -103,6 +103,9 @@ public class Early2000sParser {
 				else
 					data.add(str.substring(c + 4).trim());
 			}
+			if(d.baseUri().equals("aa.html")) {
+				System.out.println(str);
+			}
 		}
 		while(data.contains("")) data.remove("");
 		HashMap<String, String> allData = new HashMap<String, String>();
