@@ -98,10 +98,14 @@ public class Early2000sParser {
 				String temp = str.substring(c + 4);
 				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
-				if (temp.lastIndexOf("<br>") >= 0)
+				if (temp.lastIndexOf("<br>") >= 0) {
+					if (data.contains(temp.substring(temp.lastIndexOf(("<br>") + 4)).trim())) continue;
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
-				else
+				}
+				else {
+					if (data.contains(str.substring(c + 4).trim())) continue;
 					data.add(str.substring(c + 4).trim());
+				}
 			}
 			if(d.baseUri().equals("aa.html")) {
 				System.out.println(str);
