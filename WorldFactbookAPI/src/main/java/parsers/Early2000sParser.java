@@ -12,16 +12,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map.Entry;
+
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 
 public class Early2000sParser {
 	public static void parse(String year, String htmlFolderPath) {
@@ -97,7 +93,6 @@ public class Early2000sParser {
 		}
 		String[] breaks = e.html().split("</td>");
 		ArrayList<String> data = new ArrayList<String>();
-		int surplusCount = 0;
 		for (String str : breaks) {
 			int c = str.lastIndexOf("</a>");
 			if (c >= 0) {
@@ -105,15 +100,9 @@ public class Early2000sParser {
 				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
 				if (temp.lastIndexOf("<br>") >= 0) {
-					if (data.contains(temp.substring(temp.lastIndexOf("<br>") + 4).trim())) {
-						surplusCount++;
-						//System.out.println("Repeat count at: " + surplusCount);
-						//continue;
-					}
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
 				}
 				else {
-					//if (data.contains(str.substring(c + 4).trim())) continue;
 					data.add(str.substring(c + 4).trim());
 				}
 			}
@@ -121,7 +110,6 @@ public class Early2000sParser {
 				System.out.println(str);
 			}
 		}
-		System.out.println("Repeats are: " + surplusCount);
 		while(data.contains("")) data.remove("");
 		HashMap<String, String> allData = new HashMap<String, String>();
 
@@ -149,17 +137,6 @@ public class Early2000sParser {
 				if(data.get(k).length() == 0) System.out.println(k);
 				System.out.println(k+": "+data.get(k));
 			}
-		}
-		Multimap<String, String> mmap = HashMultimap.create();
-		for(Entry<String, String> entry: allData.entrySet()) {
-			mmap.put(entry.getValue(), entry.getKey());
-		}
-		System.out.println();
-		
-		for(Entry<String, Collection<String>> entry: mmap.asMap().entrySet()) {
-			if(entry.getValue().size() > 1)
-			System.out.println("Original value: " + entry.getKey() + " was mapped to keys: "
-				      + entry.getValue());
 		}
 		return allData;
 	}
