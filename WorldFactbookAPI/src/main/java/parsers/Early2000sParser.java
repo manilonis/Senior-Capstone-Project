@@ -99,7 +99,7 @@ public class Early2000sParser {
 				if (temp.contains("</font>") || temp.contains("</div>") || temp.contains("</p>") || temp.contains("</span>"))
 					continue;
 				if (temp.lastIndexOf("<br>") >= 0) {
-					if (data.contains(temp.substring(temp.lastIndexOf(("<br>") + 4)).trim())) continue;
+					if (data.contains(temp.substring(temp.lastIndexOf("<br>") + 4).trim())) continue;
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
 				}
 				else {
