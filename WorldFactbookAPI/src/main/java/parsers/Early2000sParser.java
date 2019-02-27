@@ -157,6 +157,7 @@ public class Early2000sParser {
 		System.out.println();
 		
 		for(Entry<String, Collection<String>> entry: mmap.asMap().entrySet()) {
+			if(entry.getValue().size() > 1)
 			System.out.println("Original value: " + entry.getKey() + " was mapped to keys: "
 				      + entry.getValue());
 		}
