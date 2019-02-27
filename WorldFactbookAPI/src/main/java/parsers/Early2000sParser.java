@@ -102,7 +102,7 @@ public class Early2000sParser {
 				if (temp.lastIndexOf("<br>") >= 0) {
 					if (data.contains(temp.substring(temp.lastIndexOf("<br>") + 4).trim())) {
 						surplusCount++;
-						System.out.println("Repeat count at: " + surplusCount);
+						//System.out.println("Repeat count at: " + surplusCount);
 						continue;
 					}
 					data.add(temp.substring(temp.lastIndexOf("<br>") + 4).trim());
@@ -116,6 +116,7 @@ public class Early2000sParser {
 				System.out.println(str);
 			}
 		}
+		System.out.println("Repeats are: " + surplusCount);
 		while(data.contains("")) data.remove("");
 		HashMap<String, String> allData = new HashMap<String, String>();
 
