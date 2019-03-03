@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Early2000sParser {
@@ -56,7 +57,8 @@ public class Early2000sParser {
 					if (f.getName().equals("index.html") || f.getName().equals("ee.html"))
 						continue;
 					Document d = Jsoup.parse(f, "UTF-8", f.getName());
-					whole.put(f.getName(), parseCountry(d));
+					if(d.baseUri().equals("aa.html")) parseTables(d);
+					else whole.put(f.getName(), parseCountry(d));
 					System.out.println("Done " + f.getName());
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -77,6 +79,22 @@ public class Early2000sParser {
 				ie.printStackTrace();
 			}
 		}
+	}
+	
+	private static void parseTables(Document d) {
+		Elements table = d.select("table");
+		for(Element e :table) {
+			Elements rows = e.select("tr");
+			for(int q=1; q<rows.size(); q++) {
+				Element row= rows.get(q);
+				System.out.println("Row " + q + " " + row.html());
+				Elements cols = row.select("td");
+				for(Element ee: cols) {
+					System.out.println("Column " + ee.html());
+				}
+			}
+		}
+	
 	}
 	
 	private static HashMap<String, String> parseCountry(Document d) {
