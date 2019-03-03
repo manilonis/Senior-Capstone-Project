@@ -101,7 +101,10 @@ public class Early2000sParser {
 		for(Element e: table) {
 			Elements rows = e.select("tr");
 			System.out.println("Table count is " + tableCount + " with " + rows.size()+ " rows " +  "\n\n");
-			Elements cols = rows.get(rows.size()-1).select("td");
+			for(Element r: rows) {
+				Elements cols = r.select("td");
+			
+			//Elements cols = rows.get(rows.size()-1).select("td");
 			int actualCount = 0;
 			for(int q=0; q<cols.size(); q++) {
 				Element col = cols.get(q);
@@ -116,6 +119,7 @@ public class Early2000sParser {
 					actualCount++;
 				}
 				System.out.println("Column " +q + " " + col.html());
+			}
 			}
 			tableCount++;
 		}
