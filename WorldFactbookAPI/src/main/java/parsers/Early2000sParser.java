@@ -110,11 +110,15 @@ public class Early2000sParser {
 				Element col = cols.get(q);
 				if(actualCount%2 == 0) {
 				if(!col.html().contains("&nbsp") && !col.html().contains("<img")) {
+					if(headers.contains(col.html())) {
+						System.out.println("REPEAT");
+						continue;
+					}
 					headers.add(col.html());
 					actualCount++;
 				}
 				}
-				else {
+				else if(!col.html().contains("&nbsp")){
 					data.add(col.html());
 					actualCount++;
 				}
@@ -126,8 +130,8 @@ public class Early2000sParser {
 		System.out.println("Size of new lists: headers: " + headers.size()+" data: " + data.size());
 		for(int i =0; i< data.size(); i++) {
 			//System.out.println("Header: " + headers.get(i) + " data: "+ data.get(i));
-			System.out.println("Data " + i + ": " + data.get(i));
-			//System.out.println("Headers " + i + ": " + headers.get(i));
+			//System.out.println("Data " + i + ": " + data.get(i));
+			System.out.println("Headers " + i + ": " + headers.get(i));
 		}
 	
 	}
