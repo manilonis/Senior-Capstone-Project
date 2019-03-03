@@ -111,6 +111,7 @@ public class Early2000sParser {
 							|| col.html().contains("Transportation") || col.html().contains("Transnational Issues") || col.html().contains("class=\"Defintion\"")
 							|| col.html().contains("Top of Page")) continue;
 					if (actualCount % 2 == 0) {
+						if(col.html().contains("<img")) continue;
 						if (headers.contains(col.html())) {
 							System.out.println("REPEAT");
 							continue;
