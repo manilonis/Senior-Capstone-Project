@@ -105,18 +105,20 @@ public class Early2000sParser {
 				int actualCount = 0;
 				for (int q = 0; q < cols.size(); q++) {
 					Element col = cols.get(q);
-					if(col.html().contains("&nbsp") || col.html().contains("Introduction") || col.html().contains("Geography")
-								|| col.html().contains("People") || col.html().contains("name=Govt")
-								|| col.html().contains("Economy") || col.html().contains("Communications")
-								|| col.html().contains("Transportation")
-								|| col.html().contains("Transnational Issues") || col.html().contains("Top of Page")) continue;
+					if (col.html().contains("&nbsp") || col.html().contains("Introduction")
+							|| col.html().contains("<img") || col.html().contains("Gname=\"Geo\"")
+							|| col.html().contains("name=\"People\"") || col.html().contains("name=\"Govt\"")
+							|| col.html().contains("name=\"Econ\"") || col.html().contains("Communications")
+							|| col.html().contains("Transportation") || col.html().contains("Transnational Issues")
+							|| col.html().contains("Top of Page"))
+						continue;
 					if (actualCount % 2 == 0) {
-							if (headers.contains(col.html())) {
-								System.out.println("REPEAT");
-								continue;
-							}
-							headers.add(col.html());
-							actualCount++;
+						if (headers.contains(col.html())) {
+							System.out.println("REPEAT");
+							continue;
+						}
+						headers.add(col.html());
+						actualCount++;
 					} else {
 						data.add(col.html());
 						actualCount++;
