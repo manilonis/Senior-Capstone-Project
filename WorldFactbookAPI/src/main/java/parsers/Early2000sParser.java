@@ -99,8 +99,8 @@ public class Early2000sParser {
 		ArrayList<String> headers = new ArrayList<String>();
 		ArrayList<String> data = new ArrayList<String>();
 		for(Element e: table) {
-			System.out.println("Table count is " + tableCount + "\n\n");
 			Elements rows = e.select("tr");
+			System.out.println("Table count is " + tableCount + " with " + rows.size()+ " rows " +  "\n\n");
 			Elements cols = rows.get(rows.size()-1).select("td");
 			int actualCount = 0;
 			for(int q=0; q<cols.size(); q++) {
