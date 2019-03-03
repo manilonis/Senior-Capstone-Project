@@ -106,12 +106,11 @@ public class Early2000sParser {
 				for (int q = 0; q < cols.size(); q++) {
 					Element col = cols.get(q);
 					if (col.html().contains("&nbsp") || col.html().contains("Introduction")
-							|| col.html().contains("<img") || col.html().contains("Gname=\"Geo\"")
+							|| col.html().contains("<img") || col.html().contains("name=\"Geo\"")
 							|| col.html().contains("name=\"People\"") || col.html().contains("name=\"Govt\"")
 							|| col.html().contains("name=\"Econ\"") || col.html().contains("Communications")
-							|| col.html().contains("Transportation") || col.html().contains("Transnational Issues")
-							|| col.html().contains("Top of Page"))
-						continue;
+							|| col.html().contains("Transportation") || col.html().contains("Transnational Issues") || col.html().contains("class=\"Defintion\"")
+							|| col.html().contains("Top of Page")) continue;
 					if (actualCount % 2 == 0) {
 						if (headers.contains(col.html())) {
 							System.out.println("REPEAT");
