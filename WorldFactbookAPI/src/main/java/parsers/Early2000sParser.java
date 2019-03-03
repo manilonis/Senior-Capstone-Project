@@ -83,7 +83,7 @@ public class Early2000sParser {
 	
 	private static void parseTables(Document d) {
 		Elements table = d.select("table");
-		for(Element e :table) {
+		/*for(Element e :table) {
 			Elements rows = e.select("tr");
 			for(int q=1; q<rows.size(); q++) {
 				Element row= rows.get(q);
@@ -93,14 +93,27 @@ public class Early2000sParser {
 					System.out.println("Column " + ee.html());
 				}
 			}
-		}
+		}*/
 		
 		int tableCount = 0;
+		ArrayList<String> headers = new ArrayList<String>();
+		ArrayList<String> data = new ArrayList<String>();
 		for(Element e: table) {
 			System.out.println("Table count is " + tableCount + "\n\n");
 			Elements cols = e.select("td");
+			int actualCount = 0;
 			for(int q=0; q<cols.size(); q++) {
 				Element col = cols.get(q);
+				if(actualCount%2 == 0) {
+				if(!cols.html().contains("&nbsp")) {
+					headers.add(cols.html());
+					actualCount++;
+				}
+				}
+				else {
+					data.add(cols.html());
+					actualCount++;
+				}
 				System.out.println("Column " +q + " " + col.html());
 			}
 			tableCount++;
