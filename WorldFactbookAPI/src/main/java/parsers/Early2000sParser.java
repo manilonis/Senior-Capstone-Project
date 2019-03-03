@@ -105,21 +105,20 @@ public class Early2000sParser {
 				int actualCount = 0;
 				for (int q = 0; q < cols.size(); q++) {
 					Element col = cols.get(q);
+					if(col.html().contains("&nbsp") || col.html().contains("<img")
+								|| col.html().contains("Introduction") || col.html().contains("Geography")
+								|| col.html().contains("People") || col.html().contains("Government")
+								|| col.html().contains("Economy") || col.html().contains("Communications")
+								|| col.html().contains("Transportation")
+								|| col.html().contains("Transnational Issues") || col.html().contains("Top of Page")) continue;
 					if (actualCount % 2 == 0) {
-						if (!col.html().contains("&nbsp") && !col.html().contains("<img")
-								&& !col.html().contains("Introduction") && !col.html().contains("Geography")
-								&& !col.html().contains("People") && !col.html().contains("Government")
-								&& !col.html().contains("Economy") && !col.html().contains("Communications")
-								&& !col.html().contains("Transportation")
-								&& !col.html().contains("Transnational Issues") && !col.html().contains("Top of Page")) {
 							if (headers.contains(col.html())) {
 								System.out.println("REPEAT");
 								continue;
 							}
 							headers.add(col.html());
 							actualCount++;
-						}
-					} else if (!col.html().contains("&nbsp") && !col.html().contains("Top of Page") && !col.html().contains("Definition")) {
+					} else if (!col.html().contains("Definition")) {
 						data.add(col.html());
 						actualCount++;
 					}
