@@ -118,7 +118,7 @@ public class Early2000sParser {
 							}
 							headers.add(col.html());
 							actualCount++;
-					} else if (!col.html().contains("Definition")) {
+					} else {
 						data.add(col.html());
 						actualCount++;
 					}
