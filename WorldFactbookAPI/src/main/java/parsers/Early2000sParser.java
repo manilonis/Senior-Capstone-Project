@@ -94,6 +94,17 @@ public class Early2000sParser {
 				}
 			}
 		}
+		
+		int tableCount = 0;
+		for(Element e: table) {
+			System.out.println("Table count is " + tableCount + "\n\n");
+			Elements cols = e.select("td");
+			for(int q=0; q<cols.size(); q++) {
+				Element col = cols.get(q);
+				System.out.println("Column " +q + " " + col.html());
+			}
+			tableCount++;
+		}
 	
 	}
 	
