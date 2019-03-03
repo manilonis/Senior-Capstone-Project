@@ -109,7 +109,7 @@ public class Early2000sParser {
 			for(int q=0; q<cols.size(); q++) {
 				Element col = cols.get(q);
 				if(actualCount%2 == 0) {
-				if(!cols.html().contains("&nbsp")) {
+				if(!col.html().contains("&nbsp") && !col.html().contains("<img")) {
 					headers.add(col.html());
 					actualCount++;
 				}
