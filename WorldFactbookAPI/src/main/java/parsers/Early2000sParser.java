@@ -124,7 +124,7 @@ public class Early2000sParser {
 			tableCount++;
 		}
 		System.out.println("Size of new lists: headers: " + headers.size()+" data: " + data.size());
-		for(int i =0; i< headers.size(); i++) {
+		for(int i =0; i< data.size(); i++) {
 			//System.out.println("Header: " + headers.get(i) + " data: "+ data.get(i));
 			System.out.println("Data " + i + ": " + data.get(i));
 			//System.out.println("Headers " + i + ": " + headers.get(i));
