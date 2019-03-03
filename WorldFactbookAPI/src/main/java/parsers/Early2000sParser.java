@@ -105,8 +105,7 @@ public class Early2000sParser {
 				int actualCount = 0;
 				for (int q = 0; q < cols.size(); q++) {
 					Element col = cols.get(q);
-					if(col.html().contains("&nbsp") || col.html().contains("<img")
-								|| col.html().contains("Introduction") || col.html().contains("Geography")
+					if(col.html().contains("&nbsp") || col.html().contains("Introduction") || col.html().contains("Geography")
 								|| col.html().contains("People") || col.html().contains("Government")
 								|| col.html().contains("Economy") || col.html().contains("Communications")
 								|| col.html().contains("Transportation")
