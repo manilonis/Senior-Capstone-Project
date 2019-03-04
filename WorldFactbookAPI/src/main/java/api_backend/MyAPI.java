@@ -71,7 +71,7 @@ public class MyAPI {
 				String wholeName = s.next();
 				String code = s.next();
 				if(!code.contains("-"))
-				names.put(code.toLowerCase(), wholeName);
+				names.put(code.toLowerCase().trim(), wholeName);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
