@@ -69,6 +69,7 @@ public class MyAPI {
 			s.useDelimiter(",");
 			while(s.hasNext()) {
 				String wholeName = s.next();
+				System.out.println(wholeName);
 				String code = s.next();
 				if(code.contains("-")) continue;
 				names.put(code.toLowerCase(), wholeName);
@@ -76,7 +77,7 @@ public class MyAPI {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Arrays.toString(names.keySet().toArray()));
+		//System.out.println(Arrays.toString(names.keySet().toArray()));
 		return names;
 		
 	}
