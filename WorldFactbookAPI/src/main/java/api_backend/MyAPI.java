@@ -66,7 +66,7 @@ public class MyAPI {
 		File f = new File("/home/maniloni/Senior Project/World Factbook Data/country codes.csv");
 		try {
 			Scanner s = new Scanner(f);
-			s.useDelimiter(",");
+			s.useDelimiter(",|\n");
 			while(s.hasNext()) {
 				String wholeName = s.next();
 				System.out.println("Whole Name " + wholeName);
