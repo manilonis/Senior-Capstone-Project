@@ -9,6 +9,7 @@ import static spark.Spark.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class MyAPI {
@@ -19,6 +20,11 @@ public class MyAPI {
 			maps[i] = loadFile(years[i]);
 		}
 		get("/hello", (req, res)->"Hello, world");
+		
+		get("/2005/names", (req, res)->{
+			return Arrays.toString(maps[4].keySet().toArray());
+		});
+		
 	}
 	
 	private static HashMap<String, HashMap<String, String>> loadFile(String year){
