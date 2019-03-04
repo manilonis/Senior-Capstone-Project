@@ -128,7 +128,7 @@ public class Early2000sParser {
 		}
 		HashMap<String, String> allData = new HashMap<String, String>();
 		//System.out.println("Size of new lists: headers: " + headers.size() + " data: " + data.size());
-		if(data.size() != headers.size()) System.out.println("SIZE DIFFERENCE AT " + d.baseUri());
+		if(data.size() != headers.size()) System.out.println("SIZE DIFFERENCE AT " + d.baseUri() + "Headers: "+headers.size()+" data: "+data.size());
 		for (int i = 0; i < data.size(); i++) {
 			// System.out.println("Header: " + headers.get(i) + " data: "+ data.get(i));
 			//System.out.println("Data " + i + ": " + data.get(i));
