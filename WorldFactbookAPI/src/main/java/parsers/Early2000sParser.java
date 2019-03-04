@@ -102,13 +102,13 @@ public class Early2000sParser {
 					if (actualCount % 2 == 0) {
 						if (col.html().contains("<img"))
 							continue;
-						if (headers.contains(col.html())) {
+						if (headers.contains(col.text())) {
 							continue;
 						}
-						headers.add(col.html());
+						headers.add(col.text());
 						actualCount++;
 					} else {
-						data.add(col.html());
+						data.add(col.text());
 						actualCount++;
 					}
 				}
