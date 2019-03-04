@@ -69,16 +69,14 @@ public class MyAPI {
 			s.useDelimiter(",|\n");
 			while(s.hasNext()) {
 				String wholeName = s.next();
-				System.out.println("Whole Name " + wholeName);
 				String code = s.next();
-				System.out.println("Code" + code);
 				if(code.contains("-")) continue;
 				names.put(code.toLowerCase(), wholeName);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		//System.out.println(Arrays.toString(names.keySet().toArray()));
+		System.out.println(Arrays.toString(names.keySet().toArray()));
 		return names;
 		
 	}
