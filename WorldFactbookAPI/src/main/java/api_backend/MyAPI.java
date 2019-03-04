@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -19,6 +18,7 @@ public class MyAPI {
 	public static void main(String[] args) {
 		HashMap<String, String> countryDict = getCountryNames();
 		String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
+		@SuppressWarnings("unchecked")
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
 		for(int i=0; i<years.length; i++) {
 			maps[i] = loadFile(years[i]);
@@ -38,21 +38,17 @@ public class MyAPI {
 			return thisYear.get(file).toString();
 		});
 		
-		get("/2005/names", (req, res)->{
-			return Arrays.toString(maps[4].keySet().toArray());
-		});
-		
-		get("/2005/Aruba", (req, res)->{
-			return Arrays.toString(maps[4].get("aa.html").keySet().toArray());
-		});
-		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static HashMap<String, HashMap<String, String>> loadFile(String year){
 		try {
 			FileInputStream fin = new FileInputStream("/home/maniloni/Senior Project/serialized_data/"+year+".ser");
 			ObjectInputStream oin = new ObjectInputStream(fin);
-			return (HashMap<String, HashMap<String, String>>) oin.readObject();
+			HashMap<String, HashMap<String, String>> r = (HashMap<String, HashMap<String, String>>) oin.readObject();
+			oin.close();
+			fin.close();
+			return r;
 		}catch(IOException io) {
 			io.printStackTrace();
 		} catch(ClassNotFoundException ce) {
@@ -81,6 +77,7 @@ public class MyAPI {
 				if(!code.contains("-"))
 				names.put(wholeName, code.toLowerCase().trim());
 			}
+			s.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
