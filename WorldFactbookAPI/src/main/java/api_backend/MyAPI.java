@@ -70,12 +70,13 @@ public class MyAPI {
 			while(s.hasNext()) {
 				String wholeName = s.next();
 				String code = s.next();
-				if(code.contains("-")) continue;
+				if(!code.contains("-"))
 				names.put(code.toLowerCase(), wholeName);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		System.out.println(names.size());
 		System.out.println(Arrays.toString(names.keySet().toArray()));
 		return names;
 		
