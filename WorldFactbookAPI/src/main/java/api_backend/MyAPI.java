@@ -25,6 +25,10 @@ public class MyAPI {
 			return Arrays.toString(maps[4].keySet().toArray());
 		});
 		
+		get("/2005/Aruba", (req, res)->{
+			return Arrays.toString(maps[4].get("aa.html").keySet().toArray());
+		});
+		
 	}
 	
 	private static HashMap<String, HashMap<String, String>> loadFile(String year){
