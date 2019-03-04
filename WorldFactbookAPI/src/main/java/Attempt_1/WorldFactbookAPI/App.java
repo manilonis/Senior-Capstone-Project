@@ -6,6 +6,7 @@ import parsers.HTMLParser2002;
 
 public class App {
     public static void main(String[] args){
+    	HTMLParser2000.parse();
     	System.out.println("2002 going");
     	Early2000sParser.parse("2002", "/home/maniloni/Senior Project/World Factbook Data/2002/geos/");
     	System.out.println("2003 going");
