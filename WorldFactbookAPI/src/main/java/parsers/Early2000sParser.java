@@ -57,10 +57,9 @@ public class Early2000sParser {
 					if (f.getName().equals("index.html") || f.getName().equals("ee.html"))
 						continue;
 					Document d = Jsoup.parse(f, "UTF-8", f.getName());
-					if (d.baseUri().equals("aa.html"))
-						parseTables(d);
-					else
-						whole.put(f.getName(), parseCountry(d));
+					/*if (d.baseUri().equals("aa.html"))
+						parseTables(d);*/
+					whole.put(f.getName(), parseTables(d));
 					System.out.println("Done " + f.getName());
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -83,7 +82,7 @@ public class Early2000sParser {
 		}
 	}
 
-	private static void parseTables(Document d) {
+	private static HashMap<String, String> parseTables(Document d) {
 		Elements table = d.select("table");
 		/*
 		 * for(Element e :table) { Elements rows = e.select("tr"); for(int q=1;
@@ -113,7 +112,7 @@ public class Early2000sParser {
 					if (actualCount % 2 == 0) {
 						if(col.html().contains("<img")) continue;
 						if (headers.contains(col.html())) {
-							System.out.println("REPEAT");
+							//System.out.println("REPEAT");
 							continue;
 						}
 						headers.add(col.html());
@@ -122,18 +121,22 @@ public class Early2000sParser {
 						data.add(col.html());
 						actualCount++;
 					}
-					System.out.println("Column " + q + " " + col.html());
+					//System.out.println("Column " + q + " " + col.html());
 				}
 			}
 			tableCount++;
 		}
-		System.out.println("Size of new lists: headers: " + headers.size() + " data: " + data.size());
+		HashMap<String, String> allData = new HashMap<String, String>();
+		//System.out.println("Size of new lists: headers: " + headers.size() + " data: " + data.size());
+		if(data.size() != headers.size()) System.out.println("SIZE DIFFERENCE AT " + d.baseUri());
 		for (int i = 0; i < data.size(); i++) {
 			// System.out.println("Header: " + headers.get(i) + " data: "+ data.get(i));
-			System.out.println("Data " + i + ": " + data.get(i));
-			System.out.println("Headers " + i + ": " + headers.get(i));
+			//System.out.println("Data " + i + ": " + data.get(i));
+			//System.out.println("Headers " + i + ": " + headers.get(i));
+			allData.put(headers.get(i), data.get(i));
 		}
-
+		
+		return allData;
 	}
 
 	private static HashMap<String, String> parseCountry(Document d) {
