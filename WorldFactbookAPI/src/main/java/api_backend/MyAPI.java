@@ -76,8 +76,7 @@ public class MyAPI {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println(names.size());
-		System.out.println(Arrays.toString(names.keySet().toArray()));
+		System.out.println(names.get("aa"));
 		return names;
 		
 	}
