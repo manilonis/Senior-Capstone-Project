@@ -6,20 +6,29 @@ package api_backend;
 
 import static spark.Spark.*;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class MyAPI {
 	public static void main(String[] args) {
+		getCountryNames();
 		String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
 		for(int i=0; i<years.length; i++) {
 			maps[i] = loadFile(years[i]);
 		}
 		get("/hello", (req, res)->"Hello, world");
+		
+		get("/:year/:country", (req, res)->{
+			
+			return "";
+		});
 		
 		get("/2005/names", (req, res)->{
 			return Arrays.toString(maps[4].keySet().toArray());
@@ -43,5 +52,27 @@ public class MyAPI {
 		}
 		System.out.println("LOAD ERROR " + year);
 		return null;
+	}
+	
+	private static int getYearfromArray(String year, String[] years) {
+		for(int i=0; i<years.length; i++) {
+			if(year.equals(years[i])) return i;
+		}
+		return -1;
+	}
+	
+	private static HashMap<String, String> getCountryNames(){
+		File f = new File("/home/maniloni/Senior Project/World Factbook Data/country codes.csv");
+		try {
+			Scanner s = new Scanner(f);
+			s.useDelimiter(",");
+			while(s.hasNext()) {
+				System.out.println(s.next());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
 	}
 }
