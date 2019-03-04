@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class MyAPI {
 	public static void main(String[] args) {
-		getCountryNames();
+		HashMap<String, String> countryDict = getCountryNames();
 		String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
 		for(int i=0; i<years.length; i++) {
@@ -26,8 +26,16 @@ public class MyAPI {
 		get("/hello", (req, res)->"Hello, world");
 		
 		get("/:year/:country", (req, res)->{
+			String year = req.params("year");
+			String country = req.params("country");
+			String file;
+			if(country.length() == 2) file=country.toLowerCase()+".html";
+			else {
+				file = countryDict.get(country) + ".html";
+			}
+			HashMap<String, HashMap<String, String>> thisYear = maps[getYearfromArray(year, years)];
 			
-			return "";
+			return thisYear.get(file).toString();
 		});
 		
 		get("/2005/names", (req, res)->{
@@ -71,12 +79,11 @@ public class MyAPI {
 				String wholeName = s.next();
 				String code = s.next();
 				if(!code.contains("-"))
-				names.put(code.toLowerCase().trim(), wholeName);
+				names.put(wholeName, code.toLowerCase().trim());
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		System.out.println(names.get("aa"));
 		return names;
 		
 	}
