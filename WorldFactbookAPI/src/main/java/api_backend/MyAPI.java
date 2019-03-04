@@ -62,17 +62,22 @@ public class MyAPI {
 	}
 	
 	private static HashMap<String, String> getCountryNames(){
+		HashMap<String, String> names = new HashMap<String, String>();
 		File f = new File("/home/maniloni/Senior Project/World Factbook Data/country codes.csv");
 		try {
 			Scanner s = new Scanner(f);
 			s.useDelimiter(",");
 			while(s.hasNext()) {
-				System.out.println(s.next());
+				String wholeName = s.next();
+				String code = s.next();
+				if(code.contains("-")) continue;
+				names.put(code.toLowerCase(), wholeName);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return null;
+		System.out.println(Arrays.toString(names.keySet().toArray()));
+		return names;
 		
 	}
 }
