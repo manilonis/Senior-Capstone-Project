@@ -96,7 +96,7 @@ public class Early2000sParser {
 		ArrayList<String> data = new ArrayList<String>();
 		for (Element e : table) {
 			Elements rows = e.select("tr");
-			System.out.println("Table count is " + tableCount + " with " + rows.size() + " rows " + "\n\n");
+			//System.out.println("Table count is " + tableCount + " with " + rows.size() + " rows " + "\n\n");
 			for (Element r : rows) {
 				Elements cols = r.select("td");
 
