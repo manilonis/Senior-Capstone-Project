@@ -12,11 +12,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MyAPI {
 	public static void main(String[] args) {
 		HashMap<String, String> countryDict = getCountryNames();
+		HashMap<String, String> reverseDict = new HashMap<String, String>();
+		for(Map.Entry<String, String> entry : countryDict.entrySet()){
+		    reverseDict.put(entry.getValue(), entry.getKey());
+		}
 		String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
 		@SuppressWarnings("unchecked")
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
@@ -24,6 +29,12 @@ public class MyAPI {
 			maps[i] = loadFile(years[i]);
 		}
 		get("/hello", (req, res)->"Hello, world");
+		
+		get("/:year", (req,res)->{
+			String year = req.params("year");
+			HashMap<String, HashMap<String, String>> thisYear = maps[getYearfromArray(year, years)];
+			return JSONEncoder.encodeYear(year, thisYear, reverseDict).toString(4);
+		});
 		
 		get("/:year/:country", (req, res)->{
 			String year = req.params("year");
@@ -34,6 +45,10 @@ public class MyAPI {
 				file = countryDict.get(country) + ".html";
 			}
 			HashMap<String, HashMap<String, String>> thisYear = maps[getYearfromArray(year, years)];
+			
+			if(thisYear.get(file) == null) {
+				return "Error: Country does not exist";
+			}
 			
 			return thisYear.get(file).toString();
 		});
@@ -75,7 +90,7 @@ public class MyAPI {
 				String wholeName = s.next();
 				String code = s.next();
 				if(!code.contains("-"))
-				names.put(wholeName, code.toLowerCase().trim());
+				names.put(wholeName.trim(), code.toLowerCase().trim());
 			}
 			s.close();
 		} catch (FileNotFoundException e) {
