@@ -18,6 +18,8 @@ public class JSONEncoder {
 		ArrayList<String> countryNames = new ArrayList<String>();
 		for(String str: keys) {
 			str = str.replace(".html", "");
+			String country = reverseCountryCode.get(str);
+			if(country == null) System.out.println("Error with "+str);
 			countryNames.add(reverseCountryCode.get(str));
 		}
 		
