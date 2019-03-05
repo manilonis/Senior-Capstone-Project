@@ -50,7 +50,7 @@ public class MyAPI {
 				return "Error: Country does not exist";
 			}
 			
-			return thisYear.get(file).toString();
+			return JSONEncoder.encodeCountry(country, thisYear.get(file)).toString(4);
 		});
 		
 	}

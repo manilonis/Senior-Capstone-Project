@@ -19,12 +19,30 @@ public class JSONEncoder {
 		for(String str: keys) {
 			str = str.replace(".html", "");
 			String country = reverseCountryCode.get(str);
-			if(country == null) System.out.println("Error with "+str);
+			if(country == null) {
+				System.out.println("Error with "+str);
+				continue;
+			}
 			countryNames.add(reverseCountryCode.get(str));
 		}
 		
 		r.put("year", year);
 		r.put("countries", countryNames.toArray());
+		return r;
+	}
+	
+	public static JSONObject encodeCountry(String name, HashMap<String, String> country) {
+		Set<String> keys = country.keySet();
+		JSONObject r = new JSONObject();
+		r.put("Country", name);
+		JSONObject countryData = new JSONObject();
+		for(String str: keys) {
+			String data = country.get(str);
+			countryData.put(str, data);
+		}
+		
+		r.put("data", countryData);
+		
 		return r;
 	}
 }
