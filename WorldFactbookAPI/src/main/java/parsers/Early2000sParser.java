@@ -54,7 +54,7 @@ public class Early2000sParser {
 				try {
 					if (!f.getName().endsWith(".html"))
 						continue;
-					if (f.getName().equals("index.html") || f.getName().equals("ee.html") || f.getName().contains("_"))
+					if (f.getName().equals("index.html") || f.getName().equals("ee.html"))
 						continue;
 					Document d = Jsoup.parse(f, "UTF-8", f.getName());
 					whole.put(f.getName(), parseTables(d));
