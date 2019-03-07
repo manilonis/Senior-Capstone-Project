@@ -5,8 +5,8 @@ import parsers.HTMLParser2000;
 
 public class App {
     public static void main(String[] args){
-    	//HTMLParser2000.parse();
-    	Early2000sParser.parse("2000", "/home/maniloni/Senior Project/World Factbook Data/2000/wfbfull/factbook/geos/");
+    	System.out.println("2000 going");
+    	HTMLParser2000.parse();
     	System.out.println("2002 going");
     	Early2000sParser.parse("2002", "/home/maniloni/Senior Project/World Factbook Data/2002/geos/");
     	System.out.println("2003 going");
@@ -21,6 +21,8 @@ public class App {
     	Early2000sParser.parse("2007", "/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
     	System.out.println("2008 going");
     	Early2000sParser.parse("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
+    	System.out.println("2009 going");
+    	Early2000sParser.parse("2009", "/home/maniloni/Senior Project/World Factbook Data/2009/geos/");
         System.out.println("Completed");
        
     }
