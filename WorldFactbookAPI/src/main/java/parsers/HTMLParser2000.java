@@ -41,7 +41,8 @@ public class HTMLParser2000 {
 			try {
 				HashMap<String, String> data;
 				System.out.println(f.getName());
-				if(!f.getName().endsWith(".html") || f.getName().contains("_")) continue;
+				if(!f.getName().endsWith(".html")) continue;
+				if(f.getName().contains("_")) continue;
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
 				Elements ee = d.select("p");
 				Elements top = d.select("b");
