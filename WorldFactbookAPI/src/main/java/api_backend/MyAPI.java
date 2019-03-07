@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -22,7 +23,14 @@ public class MyAPI {
 		for(Map.Entry<String, String> entry : countryDict.entrySet()){
 		    reverseDict.put(entry.getValue(), entry.getKey());
 		}
-		String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
+		File[] serialized = new File("/home/maniloni/Senior Project/serialized_data/").listFiles();
+		String[] years = new String[serialized.length];
+		for(int i=0; i<serialized.length; i++) {
+			String file = serialized[i].getName();
+			years[i] = file.substring(0, file.indexOf(".ser"));
+		}
+		System.out.println(Arrays.toString(years));
+		//String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
 		@SuppressWarnings("unchecked")
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
 		for(int i=0; i<years.length; i++) {
