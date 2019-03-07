@@ -46,6 +46,9 @@ public class HTMLParser2000 {
 					System.out.println("got template");
 					continue;
 				}
+				else {
+					System.out.println(f.getName());
+				}
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
 				Elements ee = d.select("p");
 				Elements top = d.select("b");
