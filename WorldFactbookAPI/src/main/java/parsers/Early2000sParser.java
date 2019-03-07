@@ -122,7 +122,7 @@ public class Early2000sParser {
 		for (int i = 0; i < data.size(); i++) {
 			allData.put(headers.get(i), data.get(i));
 		}
-
+		System.out.println("Data has size: " + allData.size());
 		return allData;
 	}
 }
