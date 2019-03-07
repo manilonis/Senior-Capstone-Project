@@ -17,12 +17,12 @@ public class App {
     	Early2000sParser.parse("2005", "/home/maniloni/Senior Project/World Factbook Data/2005/factbook/geos/");
     	System.out.println("2006 going");
     	Early2000sParser.parse("2006", "/home/maniloni/Senior Project/World Factbook Data/2006/factbook/geos/");
-    	System.out.println("2007 going");
-    	Early2000sParser.parse("2007", "/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
-    	System.out.println("2008 going");
-    	Early2000sParser.parse("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
-    	System.out.println("2009 going");
-    	Early2000sParser.parse("2009", "/home/maniloni/Senior Project/World Factbook Data/2009/geos/");
+//    	System.out.println("2007 going");
+//    	Early2000sParser.parse("2007", "/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
+//    	System.out.println("2008 going");
+//    	Early2000sParser.parse("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
+//    	System.out.println("2009 going");
+//    	Early2000sParser.parse("2009", "/home/maniloni/Senior Project/World Factbook Data/2009/geos/");
         System.out.println("Completed");
        
     }
