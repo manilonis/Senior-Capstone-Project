@@ -37,7 +37,6 @@ public class JSONEncoder {
 		r.put("Country", name);
 		JSONObject countryData = new JSONObject();
 		for(String str: keys) {
-			str = str.replace(":", "");
 			String data = country.get(str);
 			countryData.put(str, data);
 		}
