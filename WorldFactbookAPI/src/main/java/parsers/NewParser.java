@@ -6,6 +6,7 @@ package parsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +19,14 @@ public class NewParser {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
 			String text = d.text();
 			int c = text.indexOf("Background:");
-			System.out.println(text.substring(c));
+			text = text.substring(c).replaceAll("Aruba Top of Page", "");
+			System.out.println(text);
+			char[] text_array = text.toCharArray();
+			ArrayList<Integer> indicies = new ArrayList<Integer>();
+			for(int i =0; i< text_array.length; i++) {
+				if(text_array[i] == ':') indicies.add((Integer)i);
+			}
+			System.out.println(indicies);
 			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
