@@ -7,6 +7,7 @@ package parsers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,7 +26,7 @@ public class NewParser {
 			int c = text.indexOf("Background:");
 			text = text.substring(c);
 			text = text.replaceAll("Aruba Top of Page", "");
-			System.out.println(text.split("\n"));
+			System.out.println(Arrays.toString(text.split("\n")));
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
 			for(int i =0; i< text_array.length; i++) {
