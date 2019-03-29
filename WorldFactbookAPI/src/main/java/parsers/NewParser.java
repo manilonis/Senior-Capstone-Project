@@ -7,8 +7,6 @@ package parsers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,18 +27,23 @@ public class NewParser {
 			text = text.replaceAll("Top of Page", "");
 			String[] texts = text.split("\n");
 			ArrayList<String> texts_trimmed = new ArrayList<String>();
-			//Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
 			for(String t: texts) {
 				t = t.trim();
 				if(t.equals("Aruba") || t.length() <= 1) continue;
-				if(t.matches("^[a-zA-Z0-9]*$") || onlySpaces(t)) continue;
+				if(onlySpaces(t)) continue;
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
-			System.out.println(texts_trimmed.get(texts_trimmed.size()-7).length());
-			System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[0]));
-			System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[1]));
-			//System.out.println(Arrays.toString(text.split("\n")));
+			//System.out.println(texts_trimmed.get(texts_trimmed.size()-7).length());
+			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[0]));
+			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[1]));
+			
+			for(int i=0; i<texts_trimmed.size(); i++) {
+				if(texts_trimmed.get(i).contains("Aruba")) {
+					System.out.print(i + ", ");
+				}
+			}
+			
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
 			for(int i =0; i< text_array.length; i++) {
