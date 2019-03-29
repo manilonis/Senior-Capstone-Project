@@ -33,7 +33,7 @@ public class NewParser {
 			for(String t: texts) {
 				t = t.trim();
 				if(t.equals("Aruba") || t.length() <= 1) continue;
-				if(t.matches("^[a-zA-Z0-9]*$")) continue;
+				if(t.matches("^[a-zA-Z0-9]*$") || onlySpaces(t)) continue;
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
@@ -64,6 +64,14 @@ public class NewParser {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private static boolean onlySpaces(String s) {
+		char[] cs = s.toCharArray();
+		for(char c: cs) {
+			if((int)c != 160) return false;
+		}
+		return true;
 	}
 	
 	private static int indexOfTitle(char[] array, int i) {
