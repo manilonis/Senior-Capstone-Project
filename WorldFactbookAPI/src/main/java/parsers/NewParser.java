@@ -29,6 +29,10 @@ public class NewParser {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("ERROR at " + f.getName());
+			}
 		}
 	}
 	
