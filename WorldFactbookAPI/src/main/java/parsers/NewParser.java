@@ -25,6 +25,7 @@ public class NewParser {
 				if (f.getName().equals("index.html") || f.getName().equals("ee.html"))
 					continue;
 				Document d = Jsoup.parse(f, "UTF-8", f.getName());
+				if(d.title().contains("Redirect")) continue;
 				allData.put(f.getName(), parseFile(d));
 			} catch (IOException e) {
 				e.printStackTrace();
