@@ -30,7 +30,6 @@ public class MyAPI {
 			years[i] = file.substring(0, file.indexOf(".ser"));
 		}
 		System.out.println(Arrays.toString(years));
-		//String[] years = {"2000", "2002" , "2003", "2004" , "2005" , "2006"};
 		@SuppressWarnings("unchecked")
 		HashMap<String, HashMap<String, String>>[] maps = new HashMap [years.length];
 		for(int i=0; i<years.length; i++) {

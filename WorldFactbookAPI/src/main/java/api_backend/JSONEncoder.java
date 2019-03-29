@@ -32,6 +32,7 @@ public class JSONEncoder {
 	}
 	
 	public static JSONObject encodeCountry(String name, HashMap<String, String> country) {
+		System.out.println(country.size());
 		Set<String> keys = country.keySet();
 		JSONObject r = new JSONObject();
 		r.put("Country", name);
