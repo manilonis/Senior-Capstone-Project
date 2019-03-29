@@ -25,7 +25,7 @@ public class App {
     	System.out.println("2007 going");
     	NewParser.parse("2007","/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
     	System.out.println("2008 going");
-    	NewParser.testMethodforNewYear("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
+    	NewParser.parse("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
         System.out.println("Completed");
        
     }
