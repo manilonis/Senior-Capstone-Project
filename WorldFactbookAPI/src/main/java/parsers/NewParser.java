@@ -42,10 +42,16 @@ public class NewParser {
 	}
 	
 	private static int indexOfTitle(char[] array, int i) {
+		boolean dashLastFound = false;
 		for(int q=i; q>=0 && q<array.length; q--) {
 			if(array[q] == ' ') {
+				if (dashLastFound) {
+					dashLastFound = false;
+					continue;
+				}
 				if(q>0) {
 					if(array[q-1] == '-') {
+						dashLastFound = true;
 						continue;
 					}
 					else {
