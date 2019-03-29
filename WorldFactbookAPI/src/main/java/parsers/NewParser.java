@@ -31,7 +31,7 @@ public class NewParser {
 			for(int i =0; i< text_array.length; i++) {
 				if(text_array[i] == ':') indicies.add((Integer)i);
 			}
-			System.out.println(indicies);
+			//System.out.println(indicies);
 			ArrayList<String> lines = new ArrayList<String>();
 			int lastInd = -1;
 			for(Integer i: indicies) {
@@ -43,7 +43,7 @@ public class NewParser {
 				lines.add(text.substring(titleIndex, ind));
 				lastInd = ind;
 			}
-			System.out.println(lines);
+			//System.out.println(lines);
 			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
