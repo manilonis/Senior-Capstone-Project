@@ -37,7 +37,7 @@ public class NewParser {
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
-			System.out.println(texts_trimmed.get(texts_trimmed.size()-1).length());
+			System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[0]));
 			//System.out.println(Arrays.toString(text.split("\n")));
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
