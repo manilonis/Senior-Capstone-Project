@@ -11,6 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.KeyFactory;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +65,16 @@ public class MyAPI {
 			}
 
 			return JSONEncoder.encodeCountry(country, thisYear.get(file)).toString(4);
+		});
+		
+		post("/stop/:key", (req, res) -> {
+			System.out.println(req.contentType());
+			return null;
+//			String keyfilename = "mykey.pub";
+//			byte[] bytes = Files.readAllBytes(Paths.get(keyfilename));
+//			PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(bytes);
+//			KeyFactory kf = KeyFactory.getInstance("RSA");
+//			PrivateKey pvt = kf.generatePrivate(ks);
 		});
 
 	}
