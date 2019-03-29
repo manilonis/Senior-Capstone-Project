@@ -28,12 +28,17 @@ public class NewParser {
 				if(text_array[i] == ':') indicies.add((Integer)i);
 			}
 			System.out.println(indicies);
+			ArrayList<String> lines = new ArrayList<String>();
+			int lastInd = -1;
 			for(Integer i: indicies) {
 				int ind = i.intValue();
 				int titleIndex = indexOfTitle(text_array, ind);
-				System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
-				System.out.println("Substring title is: " + text.substring(titleIndex, ind));
+				if(lastInd >= 0) lines.add(text.substring(lastInd+1, titleIndex));
+				//System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
+				//System.out.println("Substring title is: " + text.substring(titleIndex, ind));
+				lines.add(text.substring(titleIndex, ind));
 			}
+			System.out.println(lines);
 			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
