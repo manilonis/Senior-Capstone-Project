@@ -115,6 +115,17 @@ public class NewParser {
 		return r;
 	}
 	
+	public static void testMethodforNewYear(String year, String htmlDirectory) {
+		File f = new File(htmlDirectory+"aa.html");
+		try {
+			Document d = Jsoup.parse(f, "UTF-8", f.getName());
+			System.out.println(parseFile(d).toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	private static String commaSeperateList (ArrayList<String> data) {
 		String r = new String();
 		for(String str: data) {

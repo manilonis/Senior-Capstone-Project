@@ -113,7 +113,6 @@ public class Early2000sParser {
 					}
 				}
 			}
-			tableCount++;
 		}
 		HashMap<String, String> allData = new HashMap<String, String>();
 		if (data.size() != headers.size())
