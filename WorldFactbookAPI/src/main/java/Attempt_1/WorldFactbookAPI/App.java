@@ -25,7 +25,7 @@ public class App {
 //    	System.out.println("2009 going");
 //    	Early2000sParser.parse("2009", "/home/maniloni/Senior Project/World Factbook Data/2009/geos/");
     	System.out.println("Try new 2006 alg");
-    	NewParser.parse();
+    	NewParser.parse("2007","/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
         System.out.println("Completed");
        
     }

@@ -5,7 +5,12 @@
 package parsers;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,10 +18,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class NewParser {
-	public static void parse() {
-		File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
+	@SuppressWarnings("unchecked")
+	public static void parse(String year, String html_directory) {
+		HashMap<String, HashMap<String, String>> allData;
+		try {
+			FileInputStream fin = new FileInputStream("/home/maniloni/Senior Project/serialized_data/"+year+".ser");
+			ObjectInputStream oin = new ObjectInputStream(fin);
+			
+			allData = (HashMap<String, HashMap<String, String>>) oin.readObject();
+			fin.close();
+			oin.close();
+			return;
+		}
+		catch (FileNotFoundException e1) {
+		e1.printStackTrace();
+		} catch (IOException e) {
+		e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+		System.out.println("ERROR EXITING");
+		System.exit(0);
+		}
+		
+		File folder = new File(html_directory);
 		File[] files = folder.listFiles();
-		HashMap<String, HashMap<String, String>> allData = new HashMap<String, HashMap<String, String>>();
+		allData = new HashMap<String, HashMap<String, String>>();
 		
 		for(File f: files) {
 			try {
@@ -36,10 +62,25 @@ public class NewParser {
 				System.exit(1);
 			}
 		}
+		
+		FileOutputStream fout;
+		try {
+			fout = new FileOutputStream("/home/maniloni/Senior Project/serialized_data/"+year+".ser");
+			ObjectOutputStream oout = new ObjectOutputStream(fout);
+			
+			oout.writeObject(allData);
+			System.out.println(year + "serialized");
+			fout.close();
+			oout.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private static HashMap<String, String> parseFile(Document d) {
-		System.out.println("Start parsing");
 		HashMap<String, String> r = new HashMap<String, String>();
 		d.outputSettings(new Document.OutputSettings().prettyPrint(false));
 		d.select("br").append("\\n");
