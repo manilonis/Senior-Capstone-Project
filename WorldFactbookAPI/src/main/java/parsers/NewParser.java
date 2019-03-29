@@ -30,7 +30,7 @@ public class NewParser {
 			ArrayList<String> texts_trimmed = new ArrayList<String>();
 			for(String t: texts) {
 				t = t.trim();
-				if(t.equals("Aruba")) continue;
+				if(t.equals("Aruba") || t.length() < 1) continue;
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
