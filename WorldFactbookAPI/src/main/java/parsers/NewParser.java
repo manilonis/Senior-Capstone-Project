@@ -29,11 +29,11 @@ public class NewParser {
 			text = text.replaceAll("Top of Page", "");
 			String[] texts = text.split("\n");
 			ArrayList<String> texts_trimmed = new ArrayList<String>();
-			Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
+			//Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
 			for(String t: texts) {
 				t = t.trim();
 				if(t.equals("Aruba") || t.length() < 1) continue;
-				if(!p.matcher(t).find()) continue;
+				if(!t.matches("^[a-zA-Z0-9]*$")) continue;
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
