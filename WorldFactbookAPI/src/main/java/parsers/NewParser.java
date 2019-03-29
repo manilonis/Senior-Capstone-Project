@@ -19,7 +19,8 @@ public class NewParser {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
 			String text = d.text();
 			int c = text.indexOf("Background:");
-			text = text.substring(c).replaceAll("Aruba Top of Page", "");
+			text = text.substring(c);
+			text = text.replaceAll("Aruba Top of Page", "");
 			System.out.println(text);
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
@@ -27,10 +28,31 @@ public class NewParser {
 				if(text_array[i] == ':') indicies.add((Integer)i);
 			}
 			System.out.println(indicies);
+			for(Integer i: indicies) {
+				int ind = i.intValue();
+				System.out.println("Colon idex: " + ind + " Title index: " + indexOfTitle(text_array, ind));
+			}
 			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private static int indexOfTitle(char[] array, int i) {
+		for(int q=i; q>=0 && q<array.length; q--) {
+			if(array[q] == ' ') {
+				if(q>0) {
+					if(array[q-1] == '-') {
+						continue;
+					}
+					else {
+						return q+1;
+					}
+				}
+				else return -1;
+			}
+		}
+		return -1;
 	}
 }
