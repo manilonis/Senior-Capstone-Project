@@ -32,7 +32,7 @@ public class NewParser {
 			//Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
 			for(String t: texts) {
 				t = t.trim();
-				if(t.equals("Aruba") || t.length() < 1) continue;
+				if(t.equals("Aruba") || t.length() <= 1) continue;
 				if(t.matches("^[a-zA-Z0-9]*$")) continue;
 				texts_trimmed.add(t);
 			}
