@@ -29,7 +29,7 @@ public class NewParser {
 			ArrayList<String> texts_trimmed = new ArrayList<String>();
 			for(String t: texts) {
 				t = t.trim();
-				if(t.equals("Aruba") || t.length() <= 1) continue;
+				if(t.contains("This page was last updated") || t.length() <= 1) continue;
 				if(onlySpaces(t)) continue;
 				texts_trimmed.add(t);
 			}
@@ -38,25 +38,25 @@ public class NewParser {
 			}
 			
 			
-			char[] text_array = text.toCharArray();
-			ArrayList<Integer> indicies = new ArrayList<Integer>();
-			for(int i =0; i< text_array.length; i++) {
-				if(text_array[i] == ':') indicies.add((Integer)i);
-			}
-			//System.out.println(indicies);
-			ArrayList<String> lines = new ArrayList<String>();
-			int lastInd = -1;
-			for(Integer i: indicies) {
-				int ind = i.intValue();
-				int titleIndex = indexOfTitle(text_array, ind);
-				if(lastInd >= 0) lines.add(text.substring(lastInd+1, titleIndex));
-				//System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
-				//System.out.println("Substring title is: " + text.substring(titleIndex, ind));
-				lines.add(text.substring(titleIndex, ind));
-				lastInd = ind;
-			}
-			//System.out.println(lines);
-			//System.out.println(d.text());
+//			char[] text_array = text.toCharArray();
+//			ArrayList<Integer> indicies = new ArrayList<Integer>();
+//			for(int i =0; i< text_array.length; i++) {
+//				if(text_array[i] == ':') indicies.add((Integer)i);
+//			}
+//			//System.out.println(indicies);
+//			ArrayList<String> lines = new ArrayList<String>();
+//			int lastInd = -1;
+//			for(Integer i: indicies) {
+//				int ind = i.intValue();
+//				int titleIndex = indexOfTitle(text_array, ind);
+//				if(lastInd >= 0) lines.add(text.substring(lastInd+1, titleIndex));
+//				//System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
+//				//System.out.println("Substring title is: " + text.substring(titleIndex, ind));
+//				lines.add(text.substring(titleIndex, ind));
+//				lastInd = ind;
+//			}
+//			//System.out.println(lines);
+//			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -66,11 +66,6 @@ public class NewParser {
 	private static boolean onlySpaces(String s) {
 		if(s.toCharArray()[0] == 160) return true;
 		return false;
-		/*char[] cs = s.toCharArray();
-		for(char c: cs) {
-			if((int)c != 160) return false;
-		}
-		return true;*/
 	}
 	
 	private static int indexOfTitle(char[] array, int i) {
