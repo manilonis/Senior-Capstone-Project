@@ -18,6 +18,7 @@ public class NewParser {
 		File f = new File(file_location);
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
+			parseFile(d);
 			
 			
 		} catch (IOException e) {
@@ -27,6 +28,7 @@ public class NewParser {
 	}
 	
 	private static HashMap<String, String> parseFile(Document d) {
+		System.out.println("Start parsing");
 		HashMap<String, String> r = new HashMap<String, String>();
 		d.outputSettings(new Document.OutputSettings().prettyPrint(false));
 		d.select("br").append("\\n");
@@ -58,6 +60,7 @@ public class NewParser {
 			else tempData.add(s);
 		}
 		System.out.println(r.toString());
+		return r;
 	}
 	
 	private static String commaSeperateList (ArrayList<String> data) {
