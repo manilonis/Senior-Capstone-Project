@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,9 +29,11 @@ public class NewParser {
 			text = text.replaceAll("Top of Page", "");
 			String[] texts = text.split("\n");
 			ArrayList<String> texts_trimmed = new ArrayList<String>();
+			Pattern p = Pattern.compile("^[a-zA-Z0-9]*$");
 			for(String t: texts) {
 				t = t.trim();
 				if(t.equals("Aruba") || t.length() < 1) continue;
+				if(!p.matcher(t).find()) continue;
 				texts_trimmed.add(t);
 			}
 			System.out.println(texts_trimmed);
