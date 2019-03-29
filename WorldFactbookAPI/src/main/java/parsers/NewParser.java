@@ -55,6 +55,6 @@ public class NewParser {
 				else return -1;
 			}
 		}
-		return -1;
+		return 0;
 	}
 }
