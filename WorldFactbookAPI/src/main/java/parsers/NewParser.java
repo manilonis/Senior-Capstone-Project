@@ -14,17 +14,19 @@ import org.jsoup.nodes.Document;
 
 public class NewParser {
 	public static void parse() {
-		String file_location = "/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/aa.html";
-		File f = new File(file_location);
-		try {
-			Document d = Jsoup.parse(f, "UTF-8", f.getName());
-			parseFile(d);
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		File folder = new File("/home/maniloni/Senior Project/World Factbook Data/2007/factbook/geos/");
+		File[] files = folder.listFiles();
+		HashMap<String, HashMap<String, String>> allData = new HashMap<String, HashMap<String, String>>();
 		
+		for(File f: files) {
+			try {
+				Document d = Jsoup.parse(f, "UTF-8", f.getName());
+				allData.put(f.getName(), parseFile(d));
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private static HashMap<String, String> parseFile(Document d) {
@@ -59,7 +61,7 @@ public class NewParser {
 			}
 			else tempData.add(s);
 		}
-		System.out.println(r.toString());
+		System.out.println(r.size());
 		return r;
 	}
 	
