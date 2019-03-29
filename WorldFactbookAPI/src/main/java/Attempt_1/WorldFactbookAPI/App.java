@@ -2,6 +2,7 @@ package Attempt_1.WorldFactbookAPI;
 
 import parsers.Early2000sParser;
 import parsers.HTMLParser2000;
+import parsers.NewParser;
 
 public class App {
     public static void main(String[] args){
@@ -23,6 +24,8 @@ public class App {
 //    	Early2000sParser.parse("2008", "/home/maniloni/Senior Project/World Factbook Data/2008/factbook/geos/");
 //    	System.out.println("2009 going");
 //    	Early2000sParser.parse("2009", "/home/maniloni/Senior Project/World Factbook Data/2009/geos/");
+    	System.out.println("Try new 2006 alg");
+    	NewParser.parse();
         System.out.println("Completed");
        
     }
