@@ -30,7 +30,9 @@ public class NewParser {
 			System.out.println(indicies);
 			for(Integer i: indicies) {
 				int ind = i.intValue();
-				System.out.println("Colon idex: " + ind + " Title index: " + indexOfTitle(text_array, ind));
+				int titleIndex = indexOfTitle(text_array, ind);
+				System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
+				System.out.println("Substring title is: " + text.substring(titleIndex, ind));
 			}
 			//System.out.println(d.text());
 		} catch (IOException e) {
