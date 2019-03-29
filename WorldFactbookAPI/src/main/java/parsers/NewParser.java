@@ -38,10 +38,10 @@ public class NewParser {
 			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[0]));
 			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[1]));
 			
-			for(char cs: texts_trimmed.get(282).toCharArray()) {
+			/*for(char cs: texts_trimmed.get(282).toCharArray()) {
 				System.out.println((int) cs);
 			}
-			/*for(int i=0; i<texts_trimmed.size(); i++) {
+			for(int i=0; i<texts_trimmed.size(); i++) {
 				if(texts_trimmed.get(i).contains("Aruba")) {
 					System.out.print(i + ", ");
 				}
@@ -73,11 +73,13 @@ public class NewParser {
 	}
 	
 	private static boolean onlySpaces(String s) {
-		char[] cs = s.toCharArray();
+		if(s.toCharArray()[0] == 160) return true;
+		return false;
+		/*char[] cs = s.toCharArray();
 		for(char c: cs) {
 			if((int)c != 160) return false;
 		}
-		return true;
+		return true;*/
 	}
 	
 	private static int indexOfTitle(char[] array, int i) {
