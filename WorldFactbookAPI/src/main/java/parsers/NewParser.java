@@ -38,11 +38,14 @@ public class NewParser {
 			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[0]));
 			//System.out.println((int)(texts_trimmed.get(texts_trimmed.size()-7).toCharArray()[1]));
 			
-			for(int i=0; i<texts_trimmed.size(); i++) {
+			for(char cs: texts_trimmed.get(282).toCharArray()) {
+				System.out.println((int) cs);
+			}
+			/*for(int i=0; i<texts_trimmed.size(); i++) {
 				if(texts_trimmed.get(i).contains("Aruba")) {
 					System.out.print(i + ", ");
 				}
-			}
+			}*/
 			
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
