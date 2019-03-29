@@ -25,7 +25,7 @@ public class NewParser {
 			String text = d.text().replaceAll("\\\\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", "");
 			int c = text.indexOf("Background:");
 			text = text.substring(c);
-			text = text.replaceAll("Aruba Top of Page", "");
+			text = text.replaceAll("Top of Page", "");
 			System.out.println(Arrays.toString(text.split("\n")));
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
