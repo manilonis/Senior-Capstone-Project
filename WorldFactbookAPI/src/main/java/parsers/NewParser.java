@@ -16,7 +16,10 @@ public class NewParser {
 		File f = new File(file_location);
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
-			System.out.println(d.text());
+			String text = d.text();
+			int c = text.indexOf("Background:");
+			System.out.println(text.substring(c));
+			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
