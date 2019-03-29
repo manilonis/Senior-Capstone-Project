@@ -25,7 +25,7 @@ public class NewParser {
 			int c = text.indexOf("Background:");
 			text = text.substring(c);
 			text = text.replaceAll("Aruba Top of Page", "");
-			System.out.println(text);
+			System.out.println(text.split("\n"));
 			char[] text_array = text.toCharArray();
 			ArrayList<Integer> indicies = new ArrayList<Integer>();
 			for(int i =0; i< text_array.length; i++) {
