@@ -1,9 +1,19 @@
 import requests
 import re
-import sys
+from typing import Union
+import pickle
+import os
 
 
-def data_grab(years):
+def data_grab(years: Union[list, None]) -> dict:
+    all_data = {}
+    file_there = os.path.isfile('./data.pickle')
+    if file_there:
+        with open('./data.pickle', 'rb') as f:
+            all_data = pickle.load(f)
+        return all_data
+    if years is None:
+        years = ['2004', '2002', '2006', '2003', '2005']
     year_json_response = []
     cdict = {}
     for year in years:
@@ -28,18 +38,17 @@ def data_grab(years):
     print(cdict['Lithuania'][0]['data']['Unemployment rate:'])
     print(cdict['Canada'][0]['data']['Unemployment rate:'])
 
-    all_data = {}
     for k in keys:
-        all_data[k] = {}
+        all_data[k] = {'Number of years': len(cdict[k])}
         all_data[k].update(grab_average_growth_rate(cdict, k, 'GDP - real growth rate:'))
         all_data[k].update(grab_average_budget_change(cdict, k))
         all_data[k].update(grab_average_growth_rate(cdict, k, 'Military expenditures - percent of GDP:'))
         all_data[k].update(get_average_import_export_ratio(cdict, k))
         all_data[k].update(grab_average_growth_rate(cdict, k, 'Unemployment rate:'))
-    print(all_data['Canada'])
-    print(all_data['United States'])
 
-    return
+    with open('./data.pickle', 'wb') as f:
+        pickle.dump(all_data, f)
+    return all_data
 
 
 def grab_average_growth_rate(cnt_list: dict, key: str, data_key: str) -> dict:
@@ -112,7 +121,7 @@ def grab_average_budget_change(cnt_list: dict, key: str) -> dict:
     return r
 
 
-def get_average_import_export_ratio(cnt_list, key):
+def get_average_import_export_ratio(cnt_list: dict, key: str) -> dict:
     numbers = []
     r = {'Average Import to Export Ratio': -1}
     for i in range(len(cnt_list[key])):
@@ -148,7 +157,7 @@ def get_average_import_export_ratio(cnt_list, key):
     return r
 
 
-def get_multiple(s: str):
+def get_multiple(s: str) -> (int, int):
     multiple = 0
     m = s.find('illion')
     sub = s[m-2:m].strip()
