@@ -17,7 +17,10 @@ public class NewParser {
 		File f = new File(file_location);
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
-			String text = d.text();
+			d.outputSettings(new Document.OutputSettings().prettyPrint(false));
+			d.select("br").append("\\n");
+		    d.select("p").prepend("\\n\\n");
+			String text = d.text().replaceAll("\\\\n", "\n");;
 			int c = text.indexOf("Background:");
 			text = text.substring(c);
 			text = text.replaceAll("Aruba Top of Page", "");
