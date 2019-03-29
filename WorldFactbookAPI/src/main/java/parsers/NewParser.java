@@ -20,6 +20,7 @@ public class NewParser {
 			d.outputSettings(new Document.OutputSettings().prettyPrint(false));
 			d.select("br").append("\\n");
 		    d.select("p").prepend("\\n\\n");
+		    d.select("td").prepend("\\n\\n");
 			String text = d.text().replaceAll("\\\\n", "\n");;
 			int c = text.indexOf("Background:");
 			text = text.substring(c);
