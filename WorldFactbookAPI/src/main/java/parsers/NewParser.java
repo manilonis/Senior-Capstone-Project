@@ -37,6 +37,7 @@ public class NewParser {
 				//System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
 				//System.out.println("Substring title is: " + text.substring(titleIndex, ind));
 				lines.add(text.substring(titleIndex, ind));
+				lastInd = ind;
 			}
 			System.out.println(lines);
 			//System.out.println(d.text());
