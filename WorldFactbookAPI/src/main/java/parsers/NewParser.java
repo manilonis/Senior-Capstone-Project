@@ -45,12 +45,13 @@ public class NewParser {
 		allData = new HashMap<String, HashMap<String, String>>();
 		
 		for(File f: files) {
+			String fileName = f.getName();
 			try {
-				if (!f.getName().endsWith(".html"))
+				if (!fileName.endsWith(".html"))
 					continue;
-				if (f.getName().equals("index.html") || f.getName().equals("ee.html") || f.getName().contains("countrytemplate"))
+				if (fileName.equals("index.html") || fileName.equals("ee.html") || fileName.equals("va.html")|| fileName.contains("countrytemplate"))
 					continue;
-				Document d = Jsoup.parse(f, "UTF-8", f.getName());
+				Document d = Jsoup.parse(f, "UTF-8", fileName);
 				if(d.title().contains("Redirect")) continue;
 				allData.put(f.getName(), parseFile(d));
 			} catch (IOException e) {
