@@ -7,6 +7,7 @@ package parsers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,77 +18,59 @@ public class NewParser {
 		File f = new File(file_location);
 		try {
 			Document d = Jsoup.parse(f, "UTF-8", f.getName());
-			d.outputSettings(new Document.OutputSettings().prettyPrint(false));
-			d.select("br").append("\\n");
-		    d.select("p").prepend("\\n\\n");
-		    d.select("td").prepend("\\n\\n");
-			String text = d.text().replaceAll("\\\\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", "");
-			int c = text.indexOf("Background:");
-			text = text.substring(c);
-			text = text.replaceAll("Top of Page", "");
-			String[] texts = text.split("\n");
-			ArrayList<String> texts_trimmed = new ArrayList<String>();
-			for(String t: texts) {
-				t = t.trim();
-				if(t.contains("This page was last updated") || t.length() <= 1) continue;
-				if(onlySpaces(t)) continue;
-				texts_trimmed.add(t);
-			}
-			for(String s: texts_trimmed) {
-				System.out.println(s);
-			}
 			
 			
-//			char[] text_array = text.toCharArray();
-//			ArrayList<Integer> indicies = new ArrayList<Integer>();
-//			for(int i =0; i< text_array.length; i++) {
-//				if(text_array[i] == ':') indicies.add((Integer)i);
-//			}
-//			//System.out.println(indicies);
-//			ArrayList<String> lines = new ArrayList<String>();
-//			int lastInd = -1;
-//			for(Integer i: indicies) {
-//				int ind = i.intValue();
-//				int titleIndex = indexOfTitle(text_array, ind);
-//				if(lastInd >= 0) lines.add(text.substring(lastInd+1, titleIndex));
-//				//System.out.println("Colon idex: " + ind + " Title index: " + titleIndex);
-//				//System.out.println("Substring title is: " + text.substring(titleIndex, ind));
-//				lines.add(text.substring(titleIndex, ind));
-//				lastInd = ind;
-//			}
-//			//System.out.println(lines);
-//			//System.out.println(d.text());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
+	private static HashMap<String, String> parseFile(Document d) {
+		HashMap<String, String> r = new HashMap<String, String>();
+		d.outputSettings(new Document.OutputSettings().prettyPrint(false));
+		d.select("br").append("\\n");
+	    d.select("p").prepend("\\n\\n");
+	    d.select("td").prepend("\\n\\n");
+		String text = d.text().replaceAll("\\\\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", "");
+		int c = text.indexOf("Background:");
+		text = text.substring(c);
+		text = text.replaceAll("Top of Page", "");
+		String[] texts = text.split("\n");
+		ArrayList<String> texts_trimmed = new ArrayList<String>();
+		for(String t: texts) {
+			t = t.trim();
+			if(t.contains("This page was last updated") || t.length() <= 1) continue;
+			if(onlySpaces(t)) continue;
+			texts_trimmed.add(t);
+		}
+		ArrayList<String> tempData = new ArrayList<String>();
+		String header = null;
+		for(String s: texts_trimmed) {
+			c = s.indexOf(':');
+			if(c == s.length()-1) {
+				if(header != null) {
+					r.put(header, commaSeperateList(tempData));
+				}
+				header = s;
+				tempData.clear();
+			}
+			else tempData.add(s);
+		}
+		System.out.println(r.toString());
+	}
+	
+	private static String commaSeperateList (ArrayList<String> data) {
+		String r = new String();
+		for(String str: data) {
+			if(str.equals(data.get(data.size()-1))) r += str;
+			else r += str + ", ";
+		}
+		return r;
+	}
 	private static boolean onlySpaces(String s) {
 		if(s.toCharArray()[0] == 160) return true;
 		return false;
 	}
 	
-	private static int indexOfTitle(char[] array, int i) {
-		boolean dashLastFound = false;
-		for(int q=i; q>=0 && q<array.length; q--) {
-			if(array[q] == ' ') {
-				if (dashLastFound) {
-					dashLastFound = false;
-					continue;
-				}
-				if(q>0) {
-					if(array[q-1] == '-') {
-						dashLastFound = true;
-						continue;
-					}
-					else {
-						return q+1;
-					}
-				}
-				else return -1;
-			}
-		}
-		return 0;
-	}
 }
