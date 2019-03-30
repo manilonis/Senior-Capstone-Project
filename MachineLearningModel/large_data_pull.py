@@ -3,6 +3,7 @@ import re
 from typing import Union
 import pickle
 import os
+import sys
 
 
 def data_grab(years: Union[list, None]) -> dict:
@@ -35,8 +36,6 @@ def data_grab(years: Union[list, None]) -> dict:
 
     print(len(cdict))
     keys = list(cdict.keys())
-    print(cdict['Lithuania'][0]['data']['Unemployment rate:'])
-    print(cdict['Canada'][0]['data']['Unemployment rate:'])
 
     for k in keys:
         all_data[k] = {'Number of years': len(cdict[k])}
@@ -170,6 +169,106 @@ def get_multiple(s: str) -> (int, int):
     return (m-len(sub)), multiple
 
 
+def get_available_keys(years):
+    key_counts = {}
+    num_of_countires = []
+    for year in years:
+        print("Go year " + str(year))
+        resp = requests.get('http://pi.cs.oswego.edu:4567/' + year, timeout=10)
+        c = resp.json()['countries']
+        num_of_countires.append(len(c))
+        for country in c:
+            resp = requests.get('http://pi.cs.oswego.edu:4567/' + year + '/' + country, timeout=10).json()
+            d = resp['data']
+            for k in list(d.keys()):
+                if k in key_counts:
+                    key_counts[k] = key_counts[k] + 1
+                else:
+                    key_counts[k] = 1
+    all_keys = list(key_counts.keys())
+    total_needed = 3060
+    print(total_needed)
+    max_key = -1
+    to_pop = []
+    for k in all_keys:
+        if key_counts[k] > max_key and key_counts[k] != 3060:
+            max_key = key_counts[k]
+        if key_counts[k] > (total_needed - 10):
+            print(k)
+        if key_counts[k] < 1000:
+            to_pop.append(k)
+
+    for p in to_pop:
+        key_counts.pop(p)
+    print(max_key)
+    print(list(key_counts.keys()))
+    print(len(to_pop))
+    print(len(key_counts))
+
+
+def data_grab_two(years):
+    all_data = {}
+    cdict = {}
+    for year in years:
+        print("Go year " + str(year))
+        resp = requests.get('http://pi.cs.oswego.edu:4567/' + year, timeout=10)
+        c = resp.json()['countries']
+        for country in c:
+            resp = requests.get('http://pi.cs.oswego.edu:4567/' + year + '/' + country, timeout=10)
+            if resp.status_code != 200:
+                print("BAD CODE" + str(resp.status_code) + " ERROR")
+                break
+            if country in cdict:
+                cdict[country].append(resp.json())
+            else:
+                cdict[country] = [resp.json()]
+
+    print(len(cdict))
+    keys = list(cdict.keys())
+
+    # print(cdict['Canada'][0]['data']['Population:'])
+    # print(get_average_population(cdict['Canada']))
+
+    for k in keys:
+        print(get_average_population(cdict[k]))
+
+
+def get_average_population(country):
+    key = 'Population:'
+    numbers = []
+    for c in country:
+        d = c['data']
+        if key in d:
+            p = d[key]
+            if 'uninhabited' in p or 'years' in p or "no indigenous inhabitants" in p:
+                break
+            r = re.search(r"\D\D+ | \(", p)
+            try:
+                ill = p.find('illion')
+                b = ill > (len(p)/2)
+                if 'illion' in p and not b:
+                    index, mult = get_multiple(p)
+                    numbers.append(float(p[:index-1]) * mult)
+                else:
+                    while r.start() == 0 or p[0:1].isalpha():
+                        print('while loop')
+                        p = p.replace(':', '')
+                        p = p[1:].strip()
+                        r = re.search(r"\D\D+ | \(", p)
+                    numbers.append(int(p[:r.start()].strip().replace(",", "")))
+            except Exception as e:
+                print(e.with_traceback(None))
+                print("ERROR at " + str(c['Country']))
+                print(p)
+                sys.exit(1)
+    if len(numbers) > 0:
+        return float(sum(numbers)) / float(len(numbers))
+    else:
+        return [-1]
+
+
 if __name__ == "__main__":
     # Stop Key: K1qJI9FZtMMZtvq5FnFc
-    data_grab(['2004', '2002', '2006', '2003', '2005'])
+    # data_grab(['2004', '2002', '2006', '2003', '2005'])
+    # get_available_keys(['2011', '2012', '2007', '2008', '2004', '2002', '2006', '2010', '2009', '2003', '2000', '2005'])
+    data_grab_two(['2011', '2012', '2007', '2008', '2004', '2002', '2006', '2010', '2009', '2003', '2000', '2005'])
