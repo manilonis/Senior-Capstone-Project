@@ -93,7 +93,7 @@ public class NewParser {
 		text = text.substring(c);
 		text = text.replaceAll("Top of Page", "");
 		String[] texts = text.split("\n");
-		if(d.baseUri().equals("aa.html")) System.out.println(Arrays.toString(texts));
+		//if(d.baseUri().equals("aa.html")) System.out.println(Arrays.toString(texts));
 		ArrayList<String> texts_trimmed = new ArrayList<String>();
 		for (String t : texts) {
 			t = t.trim();
