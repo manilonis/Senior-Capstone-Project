@@ -97,7 +97,7 @@ public class NewParser {
 		ArrayList<String> texts_trimmed = new ArrayList<String>();
 		for (String t : texts) {
 			t = t.trim();
-			if (t.contains("This page was last updated") || t.length() <= 1)
+			if (t.contains("This page was last updated") || t.length() <= 1 || t.contains("::"))
 				continue;
 			if (onlySpaces(t))
 				continue;
