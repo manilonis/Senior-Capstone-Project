@@ -33,13 +33,7 @@ public class App {
 		System.out.println("2013 going");
 		NewParser.parse("2013", "/home/maniloni/Senior Project/World Factbook Data/2013/factbook/geos/");
 		System.out.println("2014 going");
-<<<<<<< HEAD
 		NewParser.parse("2014", "/home/maniloni/Senior Project/World Factbook Data/2014/factbook/geos/");
-		System.out.println("2015 going");
-		NewParser.testMethodforNewYear("2015", "/home/maniloni/Senior Project/World Factbook Data/2015/geos/");
-=======
-		NewParser.testMethodforNewYear("2014", "/home/maniloni/Senior Project/World Factbook Data/2014/factbook/geos/");
->>>>>>> parent of 3b96201... Bulk parese of 2014
 
 	}
 }

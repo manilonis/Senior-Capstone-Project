@@ -86,18 +86,16 @@ public class NewParser {
 		d.outputSettings(new Document.OutputSettings().prettyPrint(false));
 		d.select("br").append("\\n");
 		d.select("p").prepend("\\n\\n");
-		d.select("a").prepend("\\n\\n");
 		d.select("td").prepend("\\n\\n");
 		String text = d.text().replaceAll("\\\\n", "\n").replaceAll("(?m)^[ \t]*\r?\n", "");
 		int c = text.indexOf("Background:");
 		text = text.substring(c);
 		text = text.replaceAll("Top of Page", "");
 		String[] texts = text.split("\n");
-		//if(d.baseUri().equals("aa.html")) System.out.println(Arrays.toString(texts));
 		ArrayList<String> texts_trimmed = new ArrayList<String>();
 		for (String t : texts) {
 			t = t.trim();
-			if (t.contains("This page was last updated") || t.length() <= 1 || t.contains("::"))
+			if (t.contains("This page was last updated") || t.length() <= 1)
 				continue;
 			if (onlySpaces(t))
 				continue;
