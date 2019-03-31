@@ -48,7 +48,7 @@ public class NewParser {
 			try {
 				if (!fileName.endsWith(".html"))
 					continue;
-				if (fileName.equals("index.html") || fileName.equals("ee.html") || fileName.contains("countrytemplate"))
+				if (fileName.equals("index.html") || fileName.equals("ee.html") || fileName.contains("countrytemplate") || fileName.charAt(1) == 'q')
 					continue;
 				Document d = Jsoup.parse(f, "UTF-8", fileName);
 				if (d.title().contains("Redirect"))
