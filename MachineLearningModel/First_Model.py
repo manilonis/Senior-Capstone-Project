@@ -123,7 +123,7 @@ def check_ratios(original_dist: dict, results_dist: dict, difference: float):
     return True
 
 
-def crete_model(in_array, out_array, run_till_good_dist=False):
+def crete_model(in_array, out_array, run_till_good_dist=False, max_loops=25):
     print(in_array.shape)
     print(out_array.shape)
     # print("Start Machine Learning")
@@ -140,7 +140,10 @@ def crete_model(in_array, out_array, run_till_good_dist=False):
 
     print(out_array.shape)
     good_ratio = False
-    while run_till_good_dist and not good_ratio:
+    if not run_till_good_dist:
+        max_loops = 1
+    loop_count = 0
+    while loop_count < max_loops and not good_ratio:
         model.fit(in_array, out_array, epochs=250, verbose=0, batch_size=2)
         pred = model.predict(in_array)
         print(pred.shape)
@@ -152,6 +155,7 @@ def crete_model(in_array, out_array, run_till_good_dist=False):
         print(new_ratios)
         good_ratio = check_ratios(org_ratios, new_ratios, 0.01)
         print(good_ratio)
+        loop_count += 1
 
     print(model.evaluate(x=in_array, y=out_array))
     return model
@@ -159,9 +163,9 @@ def crete_model(in_array, out_array, run_till_good_dist=False):
 
 if __name__ == '__main__':
     i_array, o_array, i_2_array, keys_1, keys_2 = arrays()
-    m_1 = crete_model(i_array, o_array)
+    m_1 = crete_model(i_array, o_array, run_till_good_dist=True)
     print('Go second model')
-    m_2 = crete_model(i_2_array, o_array)
+    m_2 = crete_model(i_2_array, o_array, run_till_good_dist=True)
     o_array = keras.utils.to_categorical(o_array)
     print('Eval both models')
     print('Model 1 is: ' + str(keys_1))
