@@ -58,6 +58,9 @@ def grab_average_growth_rate(cnt_list: dict, key: str, data_key: str) -> dict:
     elif 'Unemploy' in data_key:
         method_data_key = 'Average Unemployment Rate'
         r = {'Average Unemployment Rate': -1}
+    elif 'poverty' in data_key:
+        method_data_key = 'Average pop below poverty line'
+        r = {'Average pop below poverty line': -1}
     else:
         method_data_key = 'Average GDP growth rate'
         r = {'Average GDP growth rate': -1}
@@ -67,8 +70,11 @@ def grab_average_growth_rate(cnt_list: dict, key: str, data_key: str) -> dict:
         try:
             percent = d['data'][data_key]
         except KeyError:
-            break
+            print('key error')
+            continue
         if 'NA' in percent or '$' in percent:
+            if '$' in percent:
+                print('broke')
             break
         rexp = re.search("-\d", percent)
         if rexp:
@@ -208,6 +214,11 @@ def get_available_keys(years):
 
 def data_grab_two(years):
     all_data = {}
+    file_there = os.path.isfile('./data2.pickle')
+    if file_there:
+        with open('./data2.pickle', 'rb') as f:
+            all_data = pickle.load(f)
+        return all_data
     cdict = {}
     for year in years:
         print("Go year " + str(year))
@@ -226,45 +237,65 @@ def data_grab_two(years):
     print(len(cdict))
     keys = list(cdict.keys())
 
-    # print(cdict['Canada'][0]['data']['Population:'])
+    # print(cdict['Canada'][0]['data']['Population below poverty line:'])
     # print(get_average_population(cdict['Canada']))
 
     for k in keys:
-        print(get_average_population(cdict[k]))
+        all_data[k] = {}
+        # all_data[k] = {'Number of years': len(cdict[k])}
+        all_data[k].update({'Average Labor Force': get_average_population(cdict[k], key='Labor force:')})
+        all_data[k].update({'Average Population': get_average_population(cdict[k])})
+        all_data[k].update({'Average external debt': get_average_population(cdict[k], key='Debt - external:')})
+
+    with open("./data2.pickle", 'wb') as f:
+        pickle.dump(all_data, f)
+    return all_data
 
 
-def get_average_population(country):
-    key = 'Population:'
+def get_average_population(country, key='Population:'):
     numbers = []
     for c in country:
         d = c['data']
         if key in d:
-            p = d[key]
-            if 'uninhabited' in p or 'years' in p or "no indigenous inhabitants" in p:
+            p = d[key].strip()
+            if '$' in p:
+                p = p.replace('$', "")
+                p = p.replace('about', "")
+                p = p.strip()
+                if len(p) == 1:
+                    numbers.append(int(p))
+                    break
+            if p.startswith('NA') or 'uninhabited' in p or 'years' in p or "no indigenous inhabitants" in p or '%' in p \
+                    or 'see entry' in p:
                 break
             r = re.search(r"\D\D+ | \(", p)
             try:
                 ill = p.find('illion')
-                b = ill > (len(p)/2)
+                b = ill > (len(p)/2) and len(p) > 15
                 if 'illion' in p and not b:
                     index, mult = get_multiple(p)
                     numbers.append(float(p[:index-1]) * mult)
                 else:
-                    while r.start() == 0 or p[0:1].isalpha():
-                        print('while loop')
+                    while r and (r.start() == 0 or p[0:1].isalpha()):
                         p = p.replace(':', '')
                         p = p[1:].strip()
                         r = re.search(r"\D\D+ | \(", p)
-                    numbers.append(int(p[:r.start()].strip().replace(",", "")))
+                    if not r and p[len(p)-2: len(p)-1].isdigit():
+                        if ' ' in p.strip():
+                            index_of_space = p.find(' ')
+                            numbers.append(int(p[:index_of_space].strip().replace(",", "")))
+                        else:
+                            numbers.append(int(p.strip().replace(",", "")))
+                    else:
+                        numbers.append(int(p[:r.start()].strip().replace(",", "")))
             except Exception as e:
                 print(e.with_traceback(None))
                 print("ERROR at " + str(c['Country']))
-                print(p)
                 sys.exit(1)
     if len(numbers) > 0:
         return float(sum(numbers)) / float(len(numbers))
     else:
-        return [-1]
+        return -1
 
 
 if __name__ == "__main__":
