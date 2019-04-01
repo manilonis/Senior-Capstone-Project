@@ -1,4 +1,7 @@
-from MachineLearningModel.large_data_pull import data_grab, data_grab_two
+try:
+    from MachineLearningModel.large_data_pull import data_grab, data_grab_two
+except ImportError:
+    from large_data_pull import data_grab, data_grab_two
 import numpy as np
 import copy
 from typing import Union
