@@ -7,6 +7,8 @@ import copy
 from typing import Union
 import random
 from tensorflow import keras
+import pickle
+import os
 
 
 def arrays():
@@ -126,7 +128,7 @@ def check_ratios(original_dist: dict, results_dist: dict, difference: float):
     return True
 
 
-def crete_model(in_array, out_array, run_till_good_dist=False, max_loops=25):
+def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist: bool = False, max_loops: int = 25):
     print(in_array.shape)
     print(out_array.shape)
     # print("Start Machine Learning")
@@ -147,7 +149,7 @@ def crete_model(in_array, out_array, run_till_good_dist=False, max_loops=25):
         max_loops = 1
     loop_count = 0
     while loop_count < max_loops and not good_ratio:
-        model.fit(in_array, out_array, epochs=250, verbose=0, batch_size=2)
+        model.fit(in_array, out_array, epochs=500, verbose=1, batch_size=2)
         pred = model.predict(in_array)
         print(pred.shape)
         results = [np.argmax(y) for y in pred]
@@ -164,14 +166,54 @@ def crete_model(in_array, out_array, run_till_good_dist=False, max_loops=25):
     return model
 
 
+def write_model_evals(model: keras.models.Sequential, params: list, x_array: np.ndarray, y_array: np.ndarray):
+    if len(y_array.shape) < 2:
+        y_tarray = keras.utils.to_categorical(copy.deepcopy(y_array))
+    else:
+        y_tarray = copy.deepcopy(y_array)
+    print(x_array.shape, y_tarray.shape)
+    with open('model_results.txt', 'a') as f:
+        s = 'Model with parameters: ' + str(params)
+        s += '\n' + "Has accuracy: " + str(model.evaluate(x=x_array, y=y_tarray)[1]) + '\n'
+        f.write(s)
+        f.close()
+
+
+def keys_check(key_1: list, key_2: list = None):
+    if keys_2 is None:
+        if not os.path.isfile('./keys.pickle'):
+            return False
+        with open('./keys.pickle', 'rb') as f:
+            list_of_list = pickle.load(f)
+            for l in list_of_list:
+                if set(keys_1) == set(l):
+                    f.close()
+                    return True
+        f.close()
+        return False
+    else:
+        exist = os.path.isfile('./keys.pickle')
+        list_of_list = []
+        if exist:
+            with open('./keys.pickle', 'rb') as f:
+                list_of_list = pickle.load(f)
+                f.close()
+        list_of_list.append(keys_1)
+        list_of_list.append(keys_2)
+        with open('./keys.pickle', 'wb') as f:
+            pickle.dump(list_of_list, f)
+            f.close()
+
+
 if __name__ == '__main__':
     i_array, o_array, i_2_array, keys_1, keys_2 = arrays()
-    m_1 = crete_model(i_array, o_array, run_till_good_dist=True)
+    if keys_check(keys_1) and keys_check(keys_2):
+        i_array, o_array, i_2_array, keys_1, keys_2 = arrays()
+        if keys_check(keys_1) and keys_check(keys_2):
+            print("Exiting as can not ke random parameters for the model. Please run again")
+            exit(2)
+    m_1 = crete_model(i_array, copy.deepcopy(o_array), run_till_good_dist=True)
+    write_model_evals(m_1, keys_1, i_array, o_array)
     print('Go second model')
-    m_2 = crete_model(i_2_array, o_array, run_till_good_dist=True)
-    o_array = keras.utils.to_categorical(o_array)
-    print('Eval both models')
-    print('Model 1 is: ' + str(keys_1))
-    # print(m_1.evaluate(x=i_array, y=o_array))
-    print('Model 2 is: ' + str(keys_2))
-    # print(m_2.evaluate(x=i_2_array, y=o_array))
+    m_2 = crete_model(i_2_array, copy.deepcopy(o_array), run_till_good_dist=True)
+    write_model_evals(m_2, keys_2, i_2_array, o_array)
