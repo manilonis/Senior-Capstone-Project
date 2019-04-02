@@ -2,11 +2,16 @@ try:
     from MachineLearningModel.large_data_pull import data_grab, data_grab_two
 except ImportError:
     from large_data_pull import data_grab, data_grab_two
+try:
+    import h5py
+except ImportError:
+    print('Models may not be able to save or load')
 import numpy as np
 import copy
 from typing import Union
 import random
 from tensorflow import keras
+from sklearn.metrics import confusion_matrix, f1_score
 import pickle
 import os
 
@@ -128,7 +133,8 @@ def check_ratios(original_dist: dict, results_dist: dict, difference: float):
     return True
 
 
-def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist: bool = False, max_loops: int = 25, verbose: int = 0):
+def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist: bool = False, max_loops: int = 25,
+                verbose: int = 0):
     print(in_array.shape)
     print(out_array.shape)
     # print("Start Machine Learning")
@@ -149,7 +155,7 @@ def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist:
         max_loops = 1
     loop_count = 0
     while loop_count < max_loops and not good_ratio:
-        model.fit(in_array, out_array, epochs=500, verbose=verbose, batch_size=2)
+        model.fit(in_array, out_array, epochs=50, verbose=verbose, batch_size=2)
         pred = model.predict(in_array)
         print(pred.shape)
         results = [np.argmax(y) for y in pred]
@@ -161,13 +167,17 @@ def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist:
         good_ratio = check_ratios(org_ratios, new_ratios, 0.01)
         print(good_ratio)
         loop_count += 1
-        print('Loop is at: ' + str(loop_count)) 
+        print('Loop is at: ' + str(loop_count))
+
+    # confusion = confusion_matrix(out_array.argmax(axis=1), results)
+    # print(confusion)
 
     print(model.evaluate(x=in_array, y=out_array))
-    return model
+    return model, results
 
 
-def write_model_evals(model: keras.models.Sequential, params: list, x_array: np.ndarray, y_array: np.ndarray):
+def write_model_evals(model: keras.models.Sequential, params: list, x_array: np.ndarray, y_array: np.ndarray,
+                      predictions: list = None):
     if len(y_array.shape) < 2:
         y_tarray = keras.utils.to_categorical(copy.deepcopy(y_array))
     else:
@@ -175,7 +185,11 @@ def write_model_evals(model: keras.models.Sequential, params: list, x_array: np.
     print(x_array.shape, y_tarray.shape)
     with open('model_results.txt', 'a') as f:
         s = 'Model with parameters: ' + str(params)
-        s += '\n' + "Has accuracy: " + str(model.evaluate(x=x_array, y=y_tarray)[1]) + '\n'
+        if predictions is None:
+            s += '\n' + "Has accuracy: " + str(model.evaluate(x=x_array, y=y_tarray)[1]) + '\n'
+        else:
+            s += '\n' + "Has accuracy: " + str(model.evaluate(x=x_array, y=y_tarray)[1]) + ' Has f1: '\
+                 + str(f1_score(y_array, predictions, average='micro')) + '\n'
         f.write(s)
         f.close()
 
@@ -206,15 +220,34 @@ def keys_check(key_1: list, key_2: list = None):
             f.close()
 
 
+def save_model(model):
+    exist = os.path.isfile('./model.h5')
+    if exist:
+        keep_going = True
+        count = 1
+        while keep_going:
+            exist = os.path.isfile('./model' + str(count) + '.h5')
+            if not exist:
+                model.save('./model' + str(count) + '.h5')
+                keep_going = False
+            else:
+                count += 1
+    else:
+        model.save('./model.h5')
+
+
 if __name__ == '__main__':
     i_array, o_array, i_2_array, keys_1, keys_2 = arrays()
     if keys_check(keys_1) and keys_check(keys_2):
         i_array, o_array, i_2_array, keys_1, keys_2 = arrays()
         if keys_check(keys_1) and keys_check(keys_2):
-            print("Exiting as can not ke random parameters for the model. Please run again")
+            print("Exiting as can not get random parameters for the model. Please run again")
+            print("If the problem persists you may have run through all the combinations")
             exit(2)
-    m_1 = crete_model(i_array, copy.deepcopy(o_array), run_till_good_dist=True)
-    write_model_evals(m_1, keys_1, i_array, o_array)
+    m_1, pred = crete_model(i_array, copy.deepcopy(o_array), run_till_good_dist=False)
+    write_model_evals(m_1, keys_1, i_array, o_array, predictions=pred)
+    save_model(m_1)
     print('Go second model')
-    m_2 = crete_model(i_2_array, copy.deepcopy(o_array), run_till_good_dist=True)
-    write_model_evals(m_2, keys_2, i_2_array, o_array)
+    m_2, pred = crete_model(i_2_array, copy.deepcopy(o_array), run_till_good_dist=False)
+    write_model_evals(m_2, keys_2, i_2_array, o_array, predictions=pred)
+    save_model(m_2)
