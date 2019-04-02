@@ -20,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Early2000sParser {
+	@SuppressWarnings("unchecked")
 	public static void parse(String year, String htmlFolderPath) {
 		boolean filesLoaded = true;
 
@@ -82,7 +83,6 @@ public class Early2000sParser {
 
 	private static HashMap<String, String> parseTables(Document d) {
 		Elements table = d.select("table");
-		int tableCount = 0;
 		ArrayList<String> headers = new ArrayList<String>();
 		ArrayList<String> data = new ArrayList<String>();
 		for (Element e : table) {
@@ -113,7 +113,6 @@ public class Early2000sParser {
 					}
 				}
 			}
-			tableCount++;
 		}
 		HashMap<String, String> allData = new HashMap<String, String>();
 		if (data.size() != headers.size())
@@ -122,7 +121,7 @@ public class Early2000sParser {
 		for (int i = 0; i < data.size(); i++) {
 			allData.put(headers.get(i), data.get(i));
 		}
-
+		System.out.println("Data has size: " + allData.size());
 		return allData;
 	}
 }
