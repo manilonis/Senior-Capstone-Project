@@ -1,2 +1,4 @@
 # Ignore all pickle data files
 *.pickle
+model_results.txt
+*.h5
