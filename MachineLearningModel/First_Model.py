@@ -72,7 +72,7 @@ def spilt_list_randomly(key_list: list):
     list_len_2 = len(key_list) - list_len_1
     while len(list_1) < list_len_1 or len(list_2) < list_len_2:
         r = random.randint(0, len(key_list)-1)
-        while r in numbers_hit:
+        while r in numbers_hit or 'years' in key_list[r]:
             r = random.randint(0, len(key_list)-1)
         numbers_hit.append(r)
         r_1 = random.randint(0, 100)
