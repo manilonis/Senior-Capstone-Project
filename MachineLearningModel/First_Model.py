@@ -155,7 +155,7 @@ def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist:
         max_loops = 1
     loop_count = 0
     while loop_count < max_loops and not good_ratio:
-        model.fit(in_array, out_array, epochs=50, verbose=verbose, batch_size=2)
+        model.fit(in_array, out_array, epochs=500, verbose=verbose, batch_size=2)
         pred = model.predict(in_array)
         print(pred.shape)
         results = [np.argmax(y) for y in pred]
@@ -244,10 +244,10 @@ if __name__ == '__main__':
             print("Exiting as can not get random parameters for the model. Please run again")
             print("If the problem persists you may have run through all the combinations")
             exit(2)
-    m_1, pred = crete_model(i_array, copy.deepcopy(o_array), run_till_good_dist=False)
+    m_1, pred = crete_model(i_array, copy.deepcopy(o_array), run_till_good_dist=True)
     write_model_evals(m_1, keys_1, i_array, o_array, predictions=pred)
     save_model(m_1)
     print('Go second model')
-    m_2, pred = crete_model(i_2_array, copy.deepcopy(o_array), run_till_good_dist=False)
+    m_2, pred = crete_model(i_2_array, copy.deepcopy(o_array), run_till_good_dist=True)
     write_model_evals(m_2, keys_2, i_2_array, o_array, predictions=pred)
     save_model(m_2)
