@@ -128,7 +128,7 @@ def check_ratios(original_dist: dict, results_dist: dict, difference: float):
     return True
 
 
-def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist: bool = False, max_loops: int = 25):
+def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist: bool = False, max_loops: int = 25, verbose: int = 0):
     print(in_array.shape)
     print(out_array.shape)
     # print("Start Machine Learning")
@@ -149,7 +149,7 @@ def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist:
         max_loops = 1
     loop_count = 0
     while loop_count < max_loops and not good_ratio:
-        model.fit(in_array, out_array, epochs=500, verbose=1, batch_size=2)
+        model.fit(in_array, out_array, epochs=500, verbose=verbose, batch_size=2)
         pred = model.predict(in_array)
         print(pred.shape)
         results = [np.argmax(y) for y in pred]
@@ -161,6 +161,7 @@ def crete_model(in_array: np.ndarray, out_array: np.ndarray, run_till_good_dist:
         good_ratio = check_ratios(org_ratios, new_ratios, 0.01)
         print(good_ratio)
         loop_count += 1
+        print('Loop is at: ' + str(loop_count)) 
 
     print(model.evaluate(x=in_array, y=out_array))
     return model
