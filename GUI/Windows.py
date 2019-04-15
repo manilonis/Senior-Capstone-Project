@@ -1,11 +1,11 @@
 import tkinter
-from tkinter import IntVar, Label, Radiobutton, StringVar
+from tkinter import IntVar, Label, Radiobutton, StringVar, Entry, Button
 from tkinter.ttk import Combobox
 import copy
 import requests
 
 
-class API_Window(tkinter.Toplevel):
+class APIWindow(tkinter.Toplevel):
 
     def __init__(self, master=None):
         tkinter.Toplevel.__init__(self, master=master)
@@ -80,3 +80,21 @@ class API_Window(tkinter.Toplevel):
         resp = requests.get('http://pi.cs.oswego.edu:4567/' + year + '/' + country, timeout=10)
         data = resp.json()['data']
         Label(self, text=str(data[self.country_options.get()])).grid(row=7, column=4, sticky='W')
+
+
+class MachineLearningWindow(tkinter.Toplevel):
+    def __init__(self, master=None):
+        tkinter.Toplevel.__init__(self, master=master)
+        Label(self, text="Predict years of existence").grid(row=0, column=0, sticky='EW', columnspan=4)
+        Label(self, text="Military Budget\n Growth Rate").grid(row=1, column=0, sticky='W')
+        Entry(self).grid(row=2, column=0)
+        Label(self, text="Average Unemployment\n Rate").grid(row=1, column=1)
+        Entry(self).grid(row=2, column=1)
+        Label(self, text="Average GDP growth\n rate").grid(row=1, column=2)
+        Entry(self).grid(row=2, column=2)
+        Label(self, text="Average Labor Force").grid(row=1, column=3)
+        Entry(self).grid(row=2, column=3)
+        Button(self, text="Predict!", command=self.predict).grid(row=3, column=0, columnspan=4)
+
+    def predict(self):
+        print('predict')
