@@ -65,6 +65,7 @@ def arrays():
 
 
 def spilt_list_randomly(key_list: list):
+    key_list = copy.deepcopy(key_list).remove('Number of years')
     list_1 = []
     list_2 = []
     numbers_hit = []
