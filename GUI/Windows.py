@@ -44,7 +44,7 @@ class APIWindow(tkinter.Toplevel):
         try:
             resp = requests.get('http://pi.cs.oswego.edu:4567/' + str(button.cget('text')), timeout=2)
         except requests.exceptions.ConnectionError:
-                print()
+            print()
         if resp is None or resp.status_code != 200:
             json_text = ["test", "Test", "Testy"]
         else:
@@ -53,6 +53,7 @@ class APIWindow(tkinter.Toplevel):
         Label(self, text="Countries Available for selected year (" + str(button.cget('text')) + "):")\
             .grid(row=4, column=0, columnspan=4, sticky='W')
         if isinstance(json_text, list):
+            list.sort(json_text)
             self.selected_country.set(json_text[0])
             self.countries['values'] = json_text
             self.countries.current(1)
@@ -89,7 +90,8 @@ class APIWindow(tkinter.Toplevel):
 class MachineLearningWindow(tkinter.Toplevel):
     def __init__(self, master=None):
         tkinter.Toplevel.__init__(self, master=master)
-        Label(self, text="Predict years of existence", font='Helvetica 12 bold').grid(row=0, column=0, sticky='EW', columnspan=4)
+        Label(self, text="Predict years of existence", font='Helvetica 12 bold').grid(row=0, column=0, sticky='EW',
+                                                                                      columnspan=4)
 
         # First group of labels and entries
         Label(self, text="Military Budget Growth\n Rate").grid(row=1, column=0, sticky='W')
